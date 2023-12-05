@@ -18,7 +18,7 @@ const knex = require("knex")({ // this is the database
         host: process.env.RDS_HOSTNAME || "localhost", 
         user: process.env.RDS_USERNAME || "postgres",
         password: process.env.RDS_PASSWORD || "danielle1",
-        database: process.env.RDS_DB_NAME || "survey",
+        database: process.env.RDS_DB_NAME || "ebdb",
         port: process.env.RDS_PORT || 5432,
         ssl: process.env.DB_SSL ? {rejectUnauthorized: false} : false
     }
@@ -44,8 +44,12 @@ app.get("/createAccount", (req, res) => {
 //councilaccess.ejs
 
 //city view data page requests
-app.get("/viewdata", (req, res) => {
-    res.render(path.join(__dirname + "/views/viewdata.ejs"));
+app.get("/viewData", (req, res) => {
+    res.render(path.join(__dirname + "/views/viewData.ejs"));
+
+    knex.select().from("participants").then( participants  => {
+        res.render("displaydata", { myparticipants : participants});
+    })
 });
 //survey page requests
 app.get("/displaySurvey", (req, res) => {
