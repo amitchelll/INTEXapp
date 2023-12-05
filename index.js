@@ -48,9 +48,10 @@ app.get("/viewData", (req, res) => {
     knex.select().from("participants").then( participants  => {
         res.render("displaydata", { myparticipants : participants});
     })
-}).catch(err => {
-    console.log(err);
-    res.status(500).json({err});
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({err});
+    });
 });
 //survey page requests
 app.get("/displaySurvey", (req, res) => {
