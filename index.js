@@ -48,7 +48,7 @@ app.get("/viewData", (req, res) => {
     res.render(path.join(__dirname + "/views/viewData.ejs"));
 
     knex.select().from("participants").then( participants  => {
-        res.render("viewData", { myparticipants : participants});
+        res.render("displaydata", { myparticipants : participants});
     })
 });
 //survey page requests
