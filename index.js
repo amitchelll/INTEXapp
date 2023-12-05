@@ -45,11 +45,12 @@ app.get("/createAccount", (req, res) => {
 
 //city view data page requests
 app.get("/viewData", (req, res) => {
-    res.render(path.join(__dirname + "/views/viewData.ejs"));
-
     knex.select().from("participants").then( participants  => {
         res.render("displaydata", { myparticipants : participants});
     })
+}).catch(err => {
+    console.log(err);
+    res.status(500).json({err});
 });
 //survey page requests
 app.get("/displaySurvey", (req, res) => {
