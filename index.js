@@ -30,7 +30,9 @@ app.get("/dashboard", (req, res) => {
     res.render(path.join(__dirname + "/views/dashboard.ejs"));
 });
 //login page requests
-
+app.get("/login", (req, res) => {
+    res.render(path.join(__dirname + "/views/login.ejs"));
+});
 //create account page requests
 
 //adminaccess.ejs
