@@ -22,11 +22,13 @@ const knex = require("knex")({ // this is the database
     }
 })
 
-//landing page requests
 app.get("/", (req, res) => {
     res.render(path.join(__dirname + "/views/index.ejs"));
 });
-
+//dashboard
+app.get("/dashboard", (req, res) => {
+    res.render(path.join(__dirname + "/views/dashboard.ejs"));
+});
 //login page requests
 
 //create account page requests
@@ -49,6 +51,5 @@ app.post("/storeSurvey", (req, res) => {
 
     res.send(sOutput);
 });
-
 
 app.listen(port, () => console.log("Website started"));
