@@ -49,10 +49,14 @@ app.get("/createAccount", (req, res) => {
 });
 
 //adminaccess.ejs
-
+app.get("/adminaccess", (req, res) => {
+    res.render(path.join(__dirname + "/views/adminaccess.ejs"));
+});
 
 //councilaccess.ejs
-
+app.get("/councilaccess", (req, res) => {
+    res.render(path.join(__dirname + "/views/councilaccess.ejs"));
+});
 
 //city view data page requests
 app.get("/viewData", (req, res) => {
