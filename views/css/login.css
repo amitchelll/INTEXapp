@@ -6,8 +6,9 @@
   .above-form-text {
     text-align: center; /* Aligns the text to the center */
     margin-bottom: 20px; /* Adds space below the text */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px; /* Adjust the font size as needed */
-    color: #333; /* Adjust the text color */
+    color: black; /* Adjust the text color */
   }  
 /* Body styles */
 body {
@@ -21,19 +22,22 @@ body {
   
   /* Form container styles */
   form {
-    width: 80%; /* Adjust the width to your preference */
-    max-width: 600px; /* Add a max-width for responsiveness */
-    margin: 20px auto; /* Center the form horizontally */
+    width: 200%; /* Adjust the width as needed */
+    max-width: none; /* Remove max-width restriction */
+    position: relative;
+    left: 50%; /* Move the element to the right by 50% of its parent container */
+    transform: translateX(-50%); /* Adjust to move the element back by half its width */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+      }
   
   /* Input styles */
   .form-outline {
     position: relative;
     margin-bottom: 20px;
+
   }
   
   .form-control {
