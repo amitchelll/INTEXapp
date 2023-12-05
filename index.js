@@ -6,9 +6,9 @@ let path = require("path");
 
 const port = 3001;
 
-app.use(express.urlencoded({extended: true}));
-
 app.set("view engine", "ejs")
+
+app.use(express.urlencoded({extended: true}));
 
 const knex = require("knex")({ // this is the database
     client: "pg",
@@ -23,11 +23,11 @@ const knex = require("knex")({ // this is the database
 })
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + "/index.html"));
+    res.render(path.join(__dirname + "/views/index.ejs"));
 });
 
 app.get("/displaySurvey", (req, res) => {
-    res.sendFile(path.join(__dirname + "/surveyInput.html"));
+    res.render(path.join(__dirname + "/views/surveyInput.ejs"));
 });
 
 app.post("/storeSurvey", (req, res) => {
