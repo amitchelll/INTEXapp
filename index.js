@@ -44,7 +44,9 @@ app.get("/createAccount", (req, res) => {
 //councilaccess.ejs
 
 //city view data page requests
-app.get("/viewdata", (req, res) => {
+app.get("/viewData", (req, res) => {
+    res.render(path.join(__dirname + "/views/viewData.ejs"));
+
     knex.select().from("participants").then( participants  => {
         res.render("displaydata", { myparticipants : participants});
     })
