@@ -10,6 +10,8 @@ app.set("view engine", "ejs")
 
 app.use(express.urlencoded({extended: true}));
 
+app.use('/css', express.static(path.join(__dirname, 'views/css')));
+
 const knex = require("knex")({ // this is the database
     client: "pg",
     connection: {
