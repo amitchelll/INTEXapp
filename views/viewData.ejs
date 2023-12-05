@@ -4,17 +4,78 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Page</title>
+    <title>Participants Table Schema</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
   </head>
   <body>
-    <form action="/viewData" method="GET">
-      <label
-        >this is where the city council members will be able to see the database
-        (eventually)</label
-      >
-      <br /><br />
-      <p>database info here</p>
-      <br /><br />
-    </form>
+    <h2>Participants Table Schema</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Column Name</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Participant_ID</td>
+          <td>INT</td>
+        </tr>
+        <tr>
+          <td>Timestamp</td>
+          <td>TIMESTAMP</td>
+        </tr>
+        <tr>
+          <td>Age</td>
+          <td>INT</td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>VARCHAR(20)</td>
+        </tr>
+        <tr>
+          <td>Relationship_status</td>
+          <td>VARCHAR(40)</td>
+        </tr>
+        <tr>
+          <td>Occupation_status</td>
+          <td>VARCHAR(40)</td>
+        </tr>
+        <tr>
+          <td>Organization_ID</td>
+          <td>INT</td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td>VARCHAR(40)</td>
+        </tr>
+        <tr>
+          <td>Social_media</td>
+          <td>VARCHAR(10)</td>
+        </tr>
+        <tr>
+          <td>Avg_time_spent</td>
+          <td>VARCHAR(40)</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
