@@ -36,7 +36,9 @@ app.get("/login", (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
 });
 //create account page requests
-
+app.get("/createAccount", (req, res) => {
+    res.render(path.join(__dirname + "/views/createAccount.ejs"));
+});
 //adminaccess.ejs
 
 //councilaccess.ejs
