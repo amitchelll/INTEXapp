@@ -32,21 +32,27 @@ const knex = require("knex")({ // this is the database
 app.get("/", (req, res) => {
     res.render(path.join(__dirname + "/views/index.ejs"));
 });
+
 //dashboard
 app.get("/dashboard", (req, res) => {
     res.render(path.join(__dirname + "/views/dashboard.ejs"));
 });
+
 //login page requests
 app.get("/login", (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
 });
+
 //create account page requests
 app.get("/createAccount", (req, res) => {
     res.render(path.join(__dirname + "/views/createAccount.ejs"));
 });
+
 //adminaccess.ejs
 
+
 //councilaccess.ejs
+
 
 //city view data page requests
 app.get("/viewData", (req, res) => {
@@ -59,6 +65,7 @@ app.get("/viewData", (req, res) => {
         res.status(500).json({err});
     });
 });
+
 //survey page requests
 app.get("/displaySurvey", (req, res) => {
     res.render(path.join(__dirname + "/views/surveyInput.ejs"));
