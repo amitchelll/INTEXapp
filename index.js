@@ -54,6 +54,10 @@ app.get("/viewData", (req, res) => {
                 "organization_id", "location", "social_media", "avg_time_spent").from("participants").then( participants  => {
         res.render("viewData", { myparticipants : participants});
     })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({err});
+    });
 });
 //survey page requests
 app.get("/displaySurvey", (req, res) => {
