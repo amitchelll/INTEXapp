@@ -12,6 +12,11 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/css', express.static(path.join(__dirname, 'views/css')));
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
+
 const knex = require("knex")({ // this is the database
     client: "pg",
     connection: {
@@ -45,13 +50,10 @@ app.get("/createAccount", (req, res) => {
 
 //city view data page requests
 app.get("/viewData", (req, res) => {
-    knex.select().from("participants").then( participants  => {
+    knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
+                "organization_id", "location", "social_media", "avg_time_spent").from("participants").then( participants  => {
         res.render("viewData", { myparticipants : participants});
     })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({err});
-    });
 });
 //survey page requests
 app.get("/displaySurvey", (req, res) => {

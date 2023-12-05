@@ -47,12 +47,13 @@
         <tbody style="font-family: Arial; font-size: 9pt;">
           <% for (let iCount = 0; iCount < myparticipants.length; iCount++) { %>
           <tr>
-            <td><%= myparticipants[iCount].participant_ID %></td>
+            <td><%= myparticipants[iCount].participant_id %></td>
             <td><%= myparticipants[iCount].timestamp %></td>
             <td><%= myparticipants[iCount].age %></td>
-            <td><%= myparticipants[iCount].aender %></td>
+            <td><%= myparticipants[iCount].gender %></td>
             <td><%= myparticipants[iCount].relationship_status %></td>
             <td><%= myparticipants[iCount].occupation_status %></td>
+            <td><%= myparticipants[iCount].organization_id %></td>
             <td><%= myparticipants[iCount].location %></td>
             <td><%= myparticipants[iCount].social_media %></td>
             <td><%= myparticipants[iCount].avg_time_spent %></td>
