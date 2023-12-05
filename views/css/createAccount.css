@@ -1,0 +1,107 @@
+/* Body styles */
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Form container styles */
+  form {
+    width: 80%; /* Adjust the width to your preference */
+    max-width: 600px; /* Add a max-width for responsiveness */
+    margin: 20px auto; /* Center the form horizontally */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input styles */
+  .form-outline {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 96%;
+    padding: 10px;
+  }
+  
+  .form-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #495057;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  
+  /* Adjust label position when input is focused or has content */
+  .form-control:focus + .form-label,
+  .form-control:not(:placeholder-shown) + .form-label {
+    transform: translateY(-125%);
+    font-size: 12px;
+    color: #007bff;
+  }
+  
+  /* Checkbox styles */
+  .form-check-label {
+    color: #495057;
+    margin-left: 5px;
+  }
+  
+/* Submit button styles */
+.btn-primary {
+    background-color: #ffc800;
+    border: none;
+    margin-top: 20px;
+    width: 50%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px; /* Adjust the font size to your preference */
+    padding: 10px 20px; /* Adjust the padding for a visually balanced button */
+  }    
+  
+/* Register link styles */
+.text-center-container {
+    text-align: center;
+    margin-top: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  .text-center {
+    color: black; /* Black font color for the <p> element */
+    display: inline;
+    margin-top: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  .register-link {
+    color: #007bff; /* Blue font color for the <a> element */
+    display: inline;
+    margin-top: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .input-font {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  
