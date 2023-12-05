@@ -38,7 +38,9 @@ app.get("/dashboard", (req, res) => {
 //councilaccess.ejs
 
 //city view data page requests
-
+app.get("/viewdata", (req, res) => {
+    res.render(path.join(__dirname + "/views/viewdata.ejs"));
+});
 //survey page requests
 app.get("/displaySurvey", (req, res) => {
     res.render(path.join(__dirname + "/views/surveyInput.ejs"));
