@@ -46,7 +46,7 @@ app.get("/createAccount", (req, res) => {
 //city view data page requests
 app.get("/viewData", (req, res) => {
     knex.select().from("participants").then( participants  => {
-        res.render("displaydata", { myparticipants : participants});
+        res.render("viewData", { myparticipants : participants});
     })
     .catch(err => {
         console.log(err);
