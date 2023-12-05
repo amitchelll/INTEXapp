@@ -27,11 +27,11 @@
 
   <body>
     <form action="/viewData" method="GET">
-<h2>Participants Table Columns</h2>
+      <h2>Participants Table Columns</h2>
 
-<table>
-    <thead>
-        <tr>
+      <table>
+        <thead>
+          <tr>
             <th>Participant_ID</th>
             <th>Timestamp</th>
             <th>Age</th>
@@ -42,12 +42,24 @@
             <th>Location</th>
             <th>Social_media</th>
             <th>Avg_time_spent</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- You can add data rows here if needed -->
-    </tbody>
-</table>
-
-</body>
+          </tr>
+        </thead>
+        <tbody style="font-family: Arial; font-size: 9pt;">
+          <% for (let iCount = 0; iCount < myparticipants.length; iCount++) { %>
+          <tr>
+            <td><%= myparticipants[iCount].participant_ID %></td>
+            <td><%= myparticipants[iCount].timestamp %></td>
+            <td><%= myparticipants[iCount].age %></td>
+            <td><%= myparticipants[iCount].aender %></td>
+            <td><%= myparticipants[iCount].relationship_status %></td>
+            <td><%= myparticipants[iCount].occupation_status %></td>
+            <td><%= myparticipants[iCount].location %></td>
+            <td><%= myparticipants[iCount].social_media %></td>
+            <td><%= myparticipants[iCount].avg_time_spent %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </form>
+  </body>
 </html>
