@@ -180,8 +180,8 @@ app.post("/storeSurvey", (req, res) => {
                 gender: req.body.gender,
                 relationship_status: req.body.relationship,
                 occupation_status: req.body.occupation,
-                organization_id: organizationMapping[key],
-                organization_type: req.body[key] === organizationMapping[key] ? key : null
+                organization_id: '1'
+                //organization_type: req.body[key] === organizationMapping[key] ? key : null
             })
         );
 
