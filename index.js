@@ -5,6 +5,7 @@ let app = express();
 let path = require("path");
 
 const port = process.env.PORT || 3002;
+const bcrypt = require('bcrypt')
 
 app.set("view engine", "ejs")
 
@@ -43,9 +44,10 @@ app.get("/resources", (req, res) => {
 });
 
 //dashboard test requests
-app.get("/dashboardtest"), (req, res) => {
-    res.render(path.join(__dirname + "/views/dashboardtest.ejs"))};
-    
+app.get("/dashboardtest", (req, res) => {
+    res.render("dashboardtest", { user: "Conner" });
+  });
+  
 //login page requests
 app.get("/login", (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
@@ -54,6 +56,53 @@ app.get("/login", (req, res) => {
 //create account page requests
 app.get("/createAccount", (req, res) => {
     res.render(path.join(__dirname + "/views/createAccount.ejs"));
+});
+app.post("/createAccount", async (req, res) => {
+    let {firstname, lastname, username, password, password2} = req.body
+
+    console.log({
+        firstname,
+        lastname,
+        username,
+        password,
+        password2
+    })
+
+    let errors =[]
+    
+    if (!firstname || !lastname || !username || !password || !password2) {
+        errors.push({message: "Please enter all fields."})
+    }
+    if (password.length < 6) {
+        errors.push({message: "Password should be at least 6 characters."})
+    }
+    if (password != password2) {
+        errors.push({message: "Passwords do not match."})
+    }
+    if (errors.length> 0) {
+        res.render("createAccount", {errors})
+    }else {
+        //form validation has passed
+
+        let hashedPassword = await bcrypt.hash(password, 10)
+        console.log(hashedPassword);
+
+    pool.query(
+        'SELECT * FROM login WHERE username = $1', [username], (err, results) => {
+            if (err){
+                throw err
+            }
+        
+            console.log(results.rows);
+
+            if (results.rows.length > 0){
+                errors.push({message: "User already registered"});
+                res.render('/createAccount', { errors })
+            }
+        }
+    )
+    }
+
 });
 
 //adminaccess.ejs
