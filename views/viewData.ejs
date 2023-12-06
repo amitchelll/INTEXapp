@@ -34,7 +34,11 @@
         <option value="">All Locations</option>
         <% if (locations && locations.length > 0) { %>
           <% locations.forEach(location => { %>
-            <option value="<%= location %>"><%= location %></option>
+            <% if (location === locationFilter) { %>
+              <option value="<%= location %>" selected><%= location %></option>
+            <% } else { %>
+              <option value="<%= location %>"><%= location %></option>
+            <% } %>
           <% }); %>
         <% } else { %>
           <option value="" disabled>No locations available</option>
