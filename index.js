@@ -71,7 +71,7 @@ app.get("/viewData", (req, res) => {
 });
 
 //survey page requests
-app.get("/displaySurvey", (req, res) => {
+app.get("/surveyInput", (req, res) => {
     res.render(path.join(__dirname + "/views/surveyInput.ejs"));
 });
 

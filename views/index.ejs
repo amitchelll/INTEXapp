@@ -15,6 +15,9 @@
         <link href="/css/myStyles.css" rel="stylesheet" />
     </head>
     <body>
+        <form action="/surveyInput" method="GET">
+            
+
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">City of Provo</span>
@@ -24,12 +27,12 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
             <div class="container">
-                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.ejs">City of Provo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.ejs">Home</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="surveyInput.ejs">Survey</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="surveyInput">Survey</a></li>
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="resources.ejs">Resources</a></li>
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="login.ejs">Login</a></li>
                     </ul>
@@ -39,7 +42,7 @@
         <section class="page-section clearfix">
             <div class="container">
                 <div class="intro">
-                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="assets/img/cityofprovo.jpg" alt="..." />
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="/assets/img/cityofprovo.jpg" alt="..." />
                     <div class="intro-text left-0 text-center bg-faded p-5 rounded">
                         <h2 class="section-heading mb-4">
                             <span class="section-heading-upper">City of Provo</span>
@@ -75,7 +78,8 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="/js/scripts.js"></script>
+        </form>
     </body>
 </html>
 
