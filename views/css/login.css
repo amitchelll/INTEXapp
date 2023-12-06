@@ -6,13 +6,14 @@
   .above-form-text {
     text-align: center; /* Aligns the text to the center */
     margin-bottom: 20px; /* Adds space below the text */
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px; /* Adjust the font size as needed */
-    color: black; /* Adjust the text color */
+    font-family: Lora, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #198754; /* Adjust the text color */
   }  
 /* Body styles */
 body {
-    background-color: #f8f9fa;
+    background-color: white;
     margin: 0;
     display: flex;
     align-items: center;
@@ -28,16 +29,15 @@ body {
     left: 50%; /* Move the element to the right by 50% of its parent container */
     transform: translateX(-50%); /* Adjust to move the element back by half its width */
     padding: 20px;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #10492f;
       }
   
   /* Input styles */
   .form-outline {
     position: relative;
     margin-bottom: 20px;
-
   }
   
   .form-control {
@@ -98,25 +98,25 @@ body {
 .text-center-container {
     text-align: center;
     margin-top: 20px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Lora, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
   
   .text-center {
     color: black; /* Black font color for the <p> element */
     display: inline;
     margin-top: 20px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Lora, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
   
   .register-link {
-    color: #007bff; /* Blue font color for the <a> element */
+    color: #10492f; /* Blue font color for the <a> element */
     display: inline;
     margin-top: 20px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Lora, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
 
   .input-font {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Lora, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
   
   
