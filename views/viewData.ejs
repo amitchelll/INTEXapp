@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- your head content remains unchanged -->
-  </head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Participants Table Schema</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin-top: 20px;
+      }
 
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
   <body>
     <form action="/viewData" method="GET">
       <h2>Participants Table Columns</h2>
 
-      <!-- Filter by Location dropdown remains unchanged -->
+      <label for="locationSelect">Filter by Location:</label>
+      <select id="locationSelect" name="location">
+        <option value="">All Locations</option>
+        <% if (locations && locations.length > 0) { %>
+          <% locations.forEach(location => { %>
+            <% if (location === locationFilter) { %>
+              <option value="<%= location %>" selected><%= location %></option>
+            <% } else { %>
+              <option value="<%= location %>"><%= location %></option>
+            <% } %>
+          <% }); %>
+        <% } else { %>
+          <option value="" disabled>No locations available</option>
+        <% } %>
+      </select>
 
       <button type="submit">Apply Filter</button>
 
