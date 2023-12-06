@@ -80,10 +80,10 @@ app.get("/viewData", (req, res) => {
   
     // Execute the query and render the view with filtered or all participants
     query.then(participants => {
-        res.render("viewData", { myparticipants: participants, locations: locationsArray });
+        res.render("viewData", { myparticipants: participants, locations: locationsArray, locationFilter: locationFilter  });
     }).catch(error => {
       // Handle errors
-      console.error(error);
+      console.log('Selected Location:', selectedLocation);
       res.status(500).send('Error retrieving participants');
     });
   });
