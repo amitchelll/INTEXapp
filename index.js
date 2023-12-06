@@ -120,4 +120,20 @@ app.post("/storeSurvey", (req, res) => {
     res.send(sOutput);
 });
 
+app.get("/addCountry", (req, res) => {
+    res.render("addCountry");
+ })
+ app.post("/addCountry", (req, res)=> {
+    knex("country").insert({
+      country_name: req.body.country_name.toUpperCase(),
+      popular_site: req.body.popular_site.toUpperCase(),
+      capital: req.body.capital.toUpperCase(),
+      population: req.body.population,
+      visited: req.body.visited ? "Y" : "N",
+      covid_level: req.body.covid_level.toUpperCase()
+   }).then(mycountry => {
+      res.redirect("/");
+   })
+ });
+
 app.listen(port, () => console.log("Website started"));
