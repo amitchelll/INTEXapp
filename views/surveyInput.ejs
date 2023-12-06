@@ -21,6 +21,8 @@
         </style>
     </head>
     <body>
+        <form action="/surveyInput" method="GET">
+
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">City of Provo</span>
@@ -35,7 +37,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.ejs">Home</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="surveyInput.ejs">Survey</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/surveyInput">Survey</a></li>
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="resources.ejs">Resources</a></li>
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="login.ejs">Login</a></li>
                     </ul>
@@ -430,6 +432,6 @@
             // Show the first question when the page loads
             showQuestion(currentQuestion);
         </script>
-    
+        </form>
     </body>
 </html>
