@@ -156,6 +156,11 @@ app.get("/viewData", (req, res) => {
     });
 });
 
+// this is for survey
+app.get("/surveyInput", (req, res) => {
+    res.render(path.join(__dirname + "/views/surveyInput.ejs"));
+});
+
 //survey page requests
 app.post("/storeSurvey", (req, res) => {
     const organizationMapping = {
