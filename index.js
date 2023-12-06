@@ -4,7 +4,7 @@ let app = express();
 
 let path = require("path");
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 app.set("view engine", "ejs")
 
@@ -42,6 +42,10 @@ app.get("/resources", (req, res) => {
     res.render(path.join(__dirname + "/views/resources.ejs"));
 });
 
+//dashboard test requests
+app.get("/dashboardtest"), (req, res) => {
+    res.render(path.join(__dirname + "/views/dashboardtest.ejs"))};
+    
 //login page requests
 app.get("/login", (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
