@@ -64,15 +64,28 @@ app.get("/councilaccess", (req, res) => {
 
 //city view data page requests
 app.get("/viewData", (req, res) => {
-    knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
-                "organization_id", "location", "social_media", "avg_time_spent").from("participants").then( participants  => {
-        res.render("viewData", { myparticipants : participants});
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({err});
+    let query = knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
+                            "organization_id", "location", "social_media", "avg_time_spent")
+                   .from("participants");
+  
+    // Extract the location filter value from the request query
+    const locationFilter = req.query.location;
+  
+    // Apply location filtering if a location is selected
+    if (locationFilter && locationFilter !== 'all') {
+      query = query.where('location', locationFilter);
+    }
+  
+    // Execute the query and render the view with filtered or all participants
+    query.then(participants => {
+      res.render("viewData", { myparticipants: participants });
+    }).catch(error => {
+      // Handle errors
+      console.error(error);
+      res.status(500).send('Error retrieving participants');
     });
-});
+  });
+  
 
 //survey page requests
 app.get("/surveyInput", (req, res) => {

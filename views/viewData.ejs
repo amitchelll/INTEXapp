@@ -29,6 +29,15 @@
     <form action="/viewData" method="GET">
       <h2>Participants Table Columns</h2>
 
+      <label for="locationSelect">Filter by Location:</label>
+      <select id="locationSelect" name="location">
+        <option value="">All Locations</option>
+        <% locations.forEach(location => { %>
+          <option value="<%= location.location %>"><%= location.location %></option>
+        <% }); %>
+      </select>
+      <button type="submit">Apply Filter</button>
+
       <table>
         <thead>
           <tr>
@@ -62,5 +71,14 @@
         </tbody>
       </table>
     </form>
+
+    <!-- Script to handle filter submission -->
+    <script>
+      document.getElementById('locationSelect').addEventListener('change', function(event) {
+        // Submit the form when the location dropdown changes
+        this.form.submit();
+      });
+    </script>
+
   </body>
 </html>
