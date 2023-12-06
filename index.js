@@ -58,11 +58,11 @@ app.get("/createAccount", (req, res) => {
     res.render(path.join(__dirname + "/views/createAccount.ejs"));
 });
 app.post("/createAccount", async (req, res) => {
-    let {firstname, lastname, username, password, password2} = req.body
+    let {first_name, last_name, username, password, password2} = req.body
 
     console.log({
-        firstname,
-        lastname,
+        first_name,
+        last_name,
         username,
         password,
         password2
@@ -70,7 +70,7 @@ app.post("/createAccount", async (req, res) => {
 
     let errors =[]
     
-    if (!firstname || !lastname || !username || !password || !password2) {
+    if (!first_name || !last_name || !username || !password || !password2) {
         errors.push({message: "Please enter all fields."})
     }
     if (password.length < 6) {
