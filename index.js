@@ -108,32 +108,41 @@ app.get("/viewData", (req, res) => {
 });
 
 //survey page requests
-app.get("/surveyInput", (req, res) => {
-    res.render(path.join(__dirname + "/views/surveyInput.ejs"));
-});
-
 app.post("/storeSurvey", (req, res) => {
-    let sOutput;
+    const organizationMapping = {
+        university: '1',
+        private: '2',
+        schoolK12: '3',
+        company: '4',
+        government: '5',
+        other: '6'
+    };
 
-    sOutput = "Age: " + req.body.age;
+    const insertPromises = Object.keys(organizationMapping)
+        .filter(key => req.body[key] === organizationMapping[key])
+        .map(key =>
+            knex("participants").insert({
+                age: req.body.age,
+                gender: req.body.gender,
+                relationship_status: req.body.relationship,
+                occupation_status: req.body.occupation,
+                organization_id: organizationMapping[key],
+                organization_type: req.body[key] === organizationMapping[key] ? key : null
+            })
+        );
 
-    res.send(sOutput);
+    Promise.all(insertPromises)
+        .then(() => {
+            res.send("Survey data stored successfully!");
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error storing survey data");
+        });
 });
 
-app.get("/addCountry", (req, res) => {
-    res.render("addCountry");
- })
  app.post("/addCountry", (req, res)=> {
-    knex("country").insert({
-      country_name: req.body.country_name.toUpperCase(),
-      popular_site: req.body.popular_site.toUpperCase(),
-      capital: req.body.capital.toUpperCase(),
-      population: req.body.population,
-      visited: req.body.visited ? "Y" : "N",
-      covid_level: req.body.covid_level.toUpperCase()
-   }).then(mycountry => {
-      res.redirect("/");
-   })
+
  });
 
 app.listen(port, () => console.log("Website started"));
