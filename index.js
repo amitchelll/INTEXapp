@@ -213,25 +213,30 @@ app.get("/councilaccess", (req, res) => {
 });
 
 //city view data page requests
+const locationsArray = ['Plainsville', 'Provo'];
+
 app.get("/viewData", (req, res) => {
-    knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
-                "organization_id", "location", "social_media", "avg_time_spent").from("participants").then( participants  => {
-        res.render("viewData", { myparticipants : participants});
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({err});
+    let query = knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
+                            "organization_id", "location", "social_media", "avg_time_spent")
+                   .from("participants");
+  
+    // Extract the location filter value from the request query
+    const locationFilter = req.query.location;
+  
+    // Apply location filtering if a location is selected
+    if (locationFilter && locationFilter !== '') {
+      query = query.where('location', locationFilter);
+    }
+  
+    // Execute the query and render the view with filtered or all participants
+    query.then(participants => {
+        res.render("viewData", { myparticipants: participants, locations: locationsArray, locationFilter: locationFilter  });
+    }).catch(error => {
+      // Handle errors
+      console.log('Selected Location:', selectedLocation);
+      res.status(500).send('Error retrieving participants');
     });
 });
-// account page requests
-app.get('/account', function (req, res, next) {
-    if(req.isAuthenticated()){
-    res.render('account', {title: 'Account', userData: req.user, userData: req.user, messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}});
-    }
-    else{
-    res.redirect('/login');
-    }
-    });
 
 //survey page requests
 app.get("/surveyInput", (req, res) => {

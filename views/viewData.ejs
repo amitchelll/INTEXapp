@@ -29,6 +29,24 @@
     <form action="/viewData" method="GET">
       <h2>Participants Table Columns</h2>
 
+      <label for="locationSelect">Filter by Location:</label>
+      <select id="locationSelect" name="location">
+        <option value="">All Locations</option>
+        <% if (locations && locations.length > 0) { %>
+          <% locations.forEach(location => { %>
+            <% if (location === locationFilter) { %>
+              <option value="<%= location %>" selected><%= location %></option>
+            <% } else { %>
+              <option value="<%= location %>"><%= location %></option>
+            <% } %>
+          <% }); %>
+        <% } else { %>
+          <option value="" disabled>No locations available</option>
+        <% } %>
+      </select>
+      <button type="button" id="applyFilter">Apply Filter</button>
+      
+
       <table>
         <thead>
           <tr>
@@ -62,5 +80,21 @@
         </tbody>
       </table>
     </form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    console.log('Selected Location:', this.value);
+
+  $(document).ready(function () {
+    $('#applyFilter').on('click', function () {
+      const selectedLocation = $('#locationSelect').val();
+      
+      // Make an AJAX request to the server
+      $.get(`/viewData?location=${selectedLocation}`, function (data) {
+        $('#filteredContent').html(data);
+      });
+    });
+  });
+</script>
   </body>
 </html>
