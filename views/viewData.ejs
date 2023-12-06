@@ -32,11 +32,16 @@
       <label for="locationSelect">Filter by Location:</label>
       <select id="locationSelect" name="location">
         <option value="">All Locations</option>
-        <% locations.forEach(location => { %>
-          <option value="<%= location.location %>"><%= location.location %></option>
-        <% }); %>
+        <% if (locations && locations.length > 0) { %>
+          <% locations.forEach(location => { %>
+            <option value="<%= location %>"><%= location %></option>
+          <% }); %>
+        <% } else { %>
+          <option value="" disabled>No locations available</option>
+        <% } %>
       </select>
       <button type="submit">Apply Filter</button>
+      
 
       <table>
         <thead>

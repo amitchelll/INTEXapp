@@ -63,6 +63,8 @@ app.get("/councilaccess", (req, res) => {
 });
 
 //city view data page requests
+const locationsArray = ['Plainsville', 'Provo'];
+
 app.get("/viewData", (req, res) => {
     let query = knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
                             "organization_id", "location", "social_media", "avg_time_spent")
@@ -78,7 +80,7 @@ app.get("/viewData", (req, res) => {
   
     // Execute the query and render the view with filtered or all participants
     query.then(participants => {
-      res.render("viewData", { myparticipants: participants });
+        res.render("viewData", { myparticipants: participants, locations: locationsArray });
     }).catch(error => {
       // Handle errors
       console.error(error);
