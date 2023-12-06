@@ -77,19 +77,20 @@
       </table>
     </form>
 
-    <!-- Script to handle filter submission -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    console.log('Selected Location:', this.value);
 
-      console.log('Selected Location:', this.value);
-
-
-      document.getElementById('locationSelect').addEventListener('change', function(event) {
-        // Submit the form when the location dropdown changes
-        this.form.submit();
+  $(document).ready(function () {
+    $('#applyFilter').on('click', function () {
+      const selectedLocation = $('#locationSelect').val();
+      
+      // Make an AJAX request to the server
+      $.get(`/viewData?location=${selectedLocation}`, function (data) {
+        $('#filteredContent').html(data);
       });
-    </script>
-    
-
+    });
+  });
+</script>
   </body>
 </html>
