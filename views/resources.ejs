@@ -15,6 +15,8 @@
         <link href="/css/myStyles.css" rel="stylesheet" />
     </head>
     <body>
+        <form action="/resources" method="GET">
+
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">City of Provo</span>
@@ -28,10 +30,10 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.ejs">Home</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="surveyInput.ejs">Survey</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="resources.ejs">Resources</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="login.ejs">Login</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="surveyInput">Survey</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/resources">Resources</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/login">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -74,5 +76,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
+        </form>
     </body>
 </html>

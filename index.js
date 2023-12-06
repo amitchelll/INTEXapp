@@ -34,8 +34,8 @@ app.get("/", (req, res) => {
 });
 
 //dashboard
-app.get("/dashboard", (req, res) => {
-    res.render(path.join(__dirname + "/views/dashboard.ejs"));
+app.get("/resources", (req, res) => {
+    res.render(path.join(__dirname + "/views/resources.ejs"));
 });
 
 //login page requests
