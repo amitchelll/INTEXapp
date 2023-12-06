@@ -67,8 +67,11 @@ const locationsArray = ['Plainsville', 'Provo'];
 
 app.get("/viewData", (req, res) => {
     let query = knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
-                            "organization_id", "location", "social_media", "avg_time_spent")
-                   .from("participants");
+                            "organization_id", "location", "social_media", "avg_time_spent", "question_id", "answer")
+                   .from("participants")
+                   .innerJoin('survey', 'participants.participant_id', 'survey.participant_id')
+                   .innerJoin('survey_questions', 'survey_answers.question_id', 'survey_questions.question_id');
+  
   
     // Extract the location filter value from the request query
     const locationFilter = req.query.location;
