@@ -180,8 +180,8 @@ app.post("/storeSurvey", (req, res) => {
                 gender: req.body.gender,
                 relationship_status: req.body.relationship,
                 occupation_status: req.body.occupation,
-                organization_id: '1',
-                //organization_type: req.body[key] === organizationMapping[key] ? key : null
+                organization_id: organizationMapping[key],
+                organization_type: req.body[key] === organizationMapping[key] ? key : null
             })
         );
 
@@ -194,9 +194,5 @@ app.post("/storeSurvey", (req, res) => {
             res.status(500).send("Error storing survey data");
         });
 });
-
- app.post("/addCountry", (req, res)=> {
-
- });
 
 app.listen(port, () => console.log("Website started"));
