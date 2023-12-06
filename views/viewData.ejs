@@ -24,7 +24,6 @@
       }
     </style>
   </head>
-
   <body>
     <form action="/viewData" method="GET">
       <h2>Participants Table Columns</h2>
@@ -44,8 +43,8 @@
           <option value="" disabled>No locations available</option>
         <% } %>
       </select>
+
       <button type="submit">Apply Filter</button>
-      
 
       <table>
         <thead>
@@ -60,6 +59,8 @@
             <th>Location</th>
             <th>Social_media</th>
             <th>Avg_time_spent</th>
+            <th>Question_ID</th>
+            <th>Answer</th>
           </tr>
         </thead>
         <tbody style="font-family: Arial; font-size: 9pt;">
@@ -75,26 +76,27 @@
             <td><%= myparticipants[iCount].location %></td>
             <td><%= myparticipants[iCount].social_media %></td>
             <td><%= myparticipants[iCount].avg_time_spent %></td>
+            <td><%= myparticipants[iCount].question_id %></td>
+            <td><%= myparticipants[iCount].answer %></td>
           </tr>
           <% } %>
         </tbody>
       </table>
     </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    console.log('Selected Location:', this.value);
-
-  $(document).ready(function () {
-    $('#applyFilter').on('click', function () {
-      const selectedLocation = $('#locationSelect').val();
-      
-      // Make an AJAX request to the server
-      $.get(`/viewData?location=${selectedLocation}`, function (data) {
-        $('#filteredContent').html(data);
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#applyFilter').on('click', function () {
+          const selectedLocation = $('#locationSelect').val();
+          
+          // Make an AJAX request to the server
+          $.get(`/viewData?location=${selectedLocation}`, function (data) {
+            $('#filteredContent').html(data);
+          });
+        });
       });
-    });
-  });
-</script>
+    </script>
   </body>
 </html>

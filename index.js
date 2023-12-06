@@ -119,10 +119,25 @@ app.get("/councilaccess", (req, res) => {
 const locationsArray = ['Plainsville', 'Provo'];
 
 app.get("/viewData", (req, res) => {
-    let query = knex.select("participant_id", "timestamp", "age", "gender", "relationship_status", "occupation_status", 
-                            "organization_id", "location", "social_media", "avg_time_spent")
-                   .from("participants");
-  
+    let query = knex
+        .select(
+            'participants.participant_id',
+            'participants.timestamp',
+            'participants.age',
+            'participants.gender',
+            'participants.relationship_status',
+            'participants.occupation_status',
+            'participants.organization_id',
+            'participants.location',
+            'participants.social_media',
+            'participants.avg_time_spent',
+            'survey_answers.question_id',
+            'survey_answers.answer'
+        )
+        .from("participants")
+        .innerJoin('survey_answers', 'participants.participant_id', 'survey_answers.participant_id')
+        .innerJoin('survey_questions', 'survey_answers.question_id', 'survey_questions.question_id');
+        
     // Extract the location filter value from the request query
     const locationFilter = req.query.location;
   
@@ -153,5 +168,21 @@ app.post("/storeSurvey", (req, res) => {
 
     res.send(sOutput);
 });
+
+app.get("/addCountry", (req, res) => {
+    res.render("addCountry");
+ })
+ app.post("/addCountry", (req, res)=> {
+    knex("country").insert({
+      country_name: req.body.country_name.toUpperCase(),
+      popular_site: req.body.popular_site.toUpperCase(),
+      capital: req.body.capital.toUpperCase(),
+      population: req.body.population,
+      visited: req.body.visited ? "Y" : "N",
+      covid_level: req.body.covid_level.toUpperCase()
+   }).then(mycountry => {
+      res.redirect("/");
+   })
+ });
 
 app.listen(port, () => console.log("Website started"));
