@@ -163,36 +163,45 @@ app.get("/surveyInput", (req, res) => {
 
 //survey page requests
 app.post("/storeSurvey", (req, res) => {
-    const organizationMapping = {
-        university: '1',
-        private: '2',
-        schoolK12: '3',
-        company: '4',
-        government: '5',
-        other: '6'
-    };
-
-    const insertPromises = Object.keys(organizationMapping)
-        .filter(key => req.body[key] === organizationMapping[key])
-        .map(key =>
-            knex("participants").insert({
-                age: req.body.age,
-                gender: req.body.gender,
-                relationship_status: req.body.relationship,
-                occupation_status: req.body.occupation,
-                organization_id: '1'
-                //organization_type: req.body[key] === organizationMapping[key] ? key : null
-            })
-        );
-
-    Promise.all(insertPromises)
-        .then(() => {
-            res.send("Survey data stored successfully!");
+    // const organizationMapping = {
+    //     university: '1',
+    //     private: '2',
+    //     schoolK12: '3',
+    //     company: '4',
+    //     government: '5',
+    //     other: '6'
+        knex("participants").insert({
+            age: req.body.age,
+            gender: req.body.gender,
+            relationship_status: req.body.relationship,
+            occupation_status: req.body.occupation,
+            organization_id: '1'
+            //organization_type: req.body[key] === organizationMapping[key] ? key : null
         })
         .catch((error) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
         });
-});
+    });
+
+
+    // const insertPromises = Object.keys(organizationMapping)
+    //     .filter(key => req.body[key] === organizationMapping[key])
+    //     .map(key =>
+    //         knex("participants").insert({
+    //             age: req.body.age,
+    //             gender: req.body.gender,
+    //             relationship_status: req.body.relationship,
+    //             occupation_status: req.body.occupation,
+    //             organization_id: '1'
+    //             //organization_type: req.body[key] === organizationMapping[key] ? key : null
+    //         })
+    //     );
+
+    // Promise.all(insertPromises)
+    //     .then(() => {
+    //         res.send("Survey data stored successfully!");
+    //     })
+// });
 
 app.listen(port, () => console.log("Website started"));
