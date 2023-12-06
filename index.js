@@ -74,7 +74,7 @@ app.get("/viewData", (req, res) => {
     const locationFilter = req.query.location;
   
     // Apply location filtering if a location is selected
-    if (locationFilter && locationFilter !== 'all') {
+    if (locationFilter && locationFilter !== '') {
       query = query.where('location', locationFilter);
     }
   
