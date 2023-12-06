@@ -80,6 +80,10 @@
     <!-- Script to handle filter submission -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+      console.log('Selected Location:', this.value);
+
+
       document.getElementById('locationSelect').addEventListener('change', function(event) {
         // Submit the form when the location dropdown changes
         this.form.submit();
