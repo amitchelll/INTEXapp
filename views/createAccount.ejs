@@ -1,92 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="/css/createAccount.css">
-  <title>Create Account</title>
-  <script>
-    // JavaScript to handle label disappearance
-    document.addEventListener('DOMContentLoaded', function () {
-    let firstNameInput = document.getElementById('firstName');
-    let lastNameInput = document.getElementById('lastName');
-    let usernameInput = document.getElementById('username');
-    let passwordInput = document.getElementById('password');
+  <head>
+    <link rel="stylesheet" href="/css/createAccount.css" />
+    <title>Create Account</title>
+    <script>
+      // JavaScript to handle label disappearance
+      document.addEventListener("DOMContentLoaded", function () {
+        let firstNameInput = document.getElementById("firstName");
+        let lastNameInput = document.getElementById("lastName");
+        let usernameInput = document.getElementById("username");
+        let passwordInput = document.getElementById("password");
 
-    let firstNameLabel = document.querySelector('.form-outline:nth-child(1) .form-label');
-    let lastNameLabel = document.querySelector('.form-outline:nth-child(2) .form-label');
-    let usernameLabel = document.querySelector('.form-outline:nth-child(3) .form-label');
-    let passwordLabel = document.querySelector('.form-outline:nth-child(4) .form-label');
+        let firstNameLabel = document.querySelector(
+          ".form-outline:nth-child(1) .form-label"
+        );
+        let lastNameLabel = document.querySelector(
+          ".form-outline:nth-child(2) .form-label"
+        );
+        let usernameLabel = document.querySelector(
+          ".form-outline:nth-child(3) .form-label"
+        );
+        let passwordLabel = document.querySelector(
+          ".form-outline:nth-child(4) .form-label"
+        );
 
-    firstNameInput.addEventListener('focus', function () {
-        firstNameLabel.classList.add('hidden');
-    });
+        firstNameInput.addEventListener("focus", function () {
+          firstNameLabel.classList.add("hidden");
+        });
 
-    firstNameInput.addEventListener('blur', function () {
-        if (firstNameInput.value === '') {
-        firstNameLabel.classList.remove('hidden');
-        }
-    });
+        firstNameInput.addEventListener("blur", function () {
+          if (firstNameInput.value === "") {
+            firstNameLabel.classList.remove("hidden");
+          }
+        });
 
-    lastNameInput.addEventListener('focus', function () {
-        lastNameLabel.classList.add('hidden');
-    });
+        lastNameInput.addEventListener("focus", function () {
+          lastNameLabel.classList.add("hidden");
+        });
 
-    lastNameInput.addEventListener('blur', function () {
-        if (lastNameInput.value === '') {
-        lastNameLabel.classList.remove('hidden');
-        }
-    });
+        lastNameInput.addEventListener("blur", function () {
+          if (lastNameInput.value === "") {
+            lastNameLabel.classList.remove("hidden");
+          }
+        });
 
-    usernameInput.addEventListener('focus', function () {
-        usernameLabel.classList.add('hidden');
-    });
+        usernameInput.addEventListener("focus", function () {
+          usernameLabel.classList.add("hidden");
+        });
 
-    usernameInput.addEventListener('blur', function () {
-        if (usernameInput.value === '') {
-        usernameLabel.classList.remove('hidden');
-        }
-    });
+        usernameInput.addEventListener("blur", function () {
+          if (usernameInput.value === "") {
+            usernameLabel.classList.remove("hidden");
+          }
+        });
 
-    passwordInput.addEventListener('focus', function () {
-        passwordLabel.classList.add('hidden');
-    });
+        passwordInput.addEventListener("focus", function () {
+          passwordLabel.classList.add("hidden");
+        });
 
-    passwordInput.addEventListener('blur', function () {
-        if (passwordInput.value === '') {
-        passwordLabel.classList.remove('hidden');
-        }
-    });
-    });
-
-  </script>
-</head>
-<body>
-  <form action="/createAccount" method="POST">
-    <!-- First Name input -->
-    <div class="form-outline">
-      <label class="form-label email-label input-font" for="firstName">First Name</label>
-      <input type="text" id="firstName" class="form-control" />
-    </div>
-
-    <!-- Last Name input -->
-    <div class="form-outline">
-      <label class="form-label email-label input-font" for="lastName">Last Name</label>
-      <input type="text" id="lastName" class="form-control" />
-    </div>
-    
-    <!-- username input -->
-    <div class="form-outline">
-        <label class="form-label email-label input-font" for="username">Username</label>
-        <input type="username" id="username" class="form-control" />
+        passwordInput.addEventListener("blur", function () {
+          if (passwordInput.value === "") {
+            passwordLabel.classList.remove("hidden");
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form action="/createAccount" method="POST">
+      <!-- First Name input -->
+      <div class="form-outline">
+        <label class="form-label email-label input-font" for="firstName"
+          >First Name</label
+        >
+        <input
+          type="text"
+          id="firstName"
+          name="firstname"
+          class="form-control"
+        />
       </div>
 
-    <!-- password input -->
-    <div class="form-outline">
-        <label class="form-label email-label input-font" for="password">Password</label>
-        <input type="password" id="password" class="form-control" />
+      <!-- Last Name input -->
+      <div class="form-outline">
+        <label class="form-label email-label input-font" for="lastName"
+          >Last Name</label
+        >
+        <input type="text" id="lastName" name="lastname" class="form-control" />
       </div>
 
-    <!-- Submit button -->
-    <button type="button" class="btn-primary" onclick="window.location.href='/login'">Create Account</button>
-  </form>
-</body>
+      <!-- username input -->
+      <div class="form-outline">
+        <label class="form-label email-label input-font" for="username"
+          >Username</label
+        >
+        <input
+          type="username"
+          id="username"
+          name="username"
+          class="form-control"
+        />
+      </div>
+
+      <!-- password input -->
+      <div class="form-outline">
+        <label class="form-label email-label input-font" for="password"
+          >Password</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+        />
+      </div>
+
+      <!-- Submit button -->
+      <button
+        type="submit"
+        class="btn-primary"
+        onclick="window.location.href='/login'"
+      >
+        Create Account
+      </button>
+    </form>
+  </body>
 </html>
