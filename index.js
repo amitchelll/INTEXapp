@@ -293,8 +293,8 @@ app.post("/storeSurvey", (req, res) => {
             gender: req.body.gender,
             relationship_status: req.body.relationship,
             occupation_status: req.body.occupation,
-            organization_id: '1',
-            //organization_type: req.body[key] === organizationMapping[key] ? key : null
+            // organization_id: req.body.orgType,
+            organization_type: req.body.orgType,
             location: 'Provo',
             social_media: req.body.use,
             avg_time_spent: req.body.avgtime
