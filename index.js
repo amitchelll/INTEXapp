@@ -305,6 +305,8 @@ app.post("/storeSurvey", (req, res) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
         });
+
+        console.log(participantsData);
         })
 
     app.listen(port, () => console.log("Website started"));
