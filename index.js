@@ -294,9 +294,8 @@ app.post("/storeSurvey", (req, res) => {
             social_media : req.body.social_media, 
             avg_time_spent : req.body.avg_time_spent
         }
-    const surveyData = {
+    const surveyData = {} 
 
-    } 
     knex("participants")
         .insert(participantsData)
         .then(() => {
@@ -308,23 +307,27 @@ app.post("/storeSurvey", (req, res) => {
         });
         })
 
-    
+        app.listen(port, () => console.log("Website started"));
 
-        return knex("survey_answers").insert(
-            {question_id: '1', answer: req.body.withPurpose},
-            {question_id: '2', answer: req.body.distractedBusy},
-            {question_id: '3', answer: req.body.restless},
-            {question_id: '4', answer: req.body.distracted},
-            {question_id: '5', answer: req.body.worries},
-            {question_id: '6', answer: req.body.concentrate},
-            {question_id: '7', answer: req.body.oftenCompare},
-            {question_id: '8', answer: req.body.feelCompare},
-            {question_id: '9', answer: req.body.validation},
-            {question_id: '10', answer: req.body.depressed},
-            {question_id: '11', answer: req.body.dailyActivity},
-            {question_id: '12', answer: req.body.sleep}
+
+        // return knex("survey_answers").insert(
+        //     {question_id: '1', answer: req.body.withPurpose},
+        //     {question_id: '2', answer: req.body.distractedBusy},
+        //     {question_id: '3', answer: req.body.restless},
+        //     {question_id: '4', answer: req.body.distracted},
+        //     {question_id: '5', answer: req.body.worries},
+        //     {question_id: '6', answer: req.body.concentrate},
+        //     {question_id: '7', answer: req.body.oftenCompare},
+        //     {question_id: '8', answer: req.body.feelCompare},
+        //     {question_id: '9', answer: req.body.validation},
+        //     {question_id: '10', answer: req.body.depressed},
+        //     {question_id: '11', answer: req.body.dailyActivity},
+        //     {question_id: '12', answer: req.body.sleep}
         
-        );
+        // );
+
+    app.listen(port, () => console.log("Website started"));
+
 
     // const insertPromises = Object.keys(organizationMapping)
     //     .filter(key => req.body[key] === organizationMapping[key])
@@ -340,9 +343,6 @@ app.post("/storeSurvey", (req, res) => {
     //     );
 
     // Promise.all(insertPromises)
-
-
-app.listen(port, () => console.log("Website started"));
 
 
   // do organization table
