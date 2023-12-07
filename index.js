@@ -241,7 +241,6 @@ app.get("/viewData", (req, res) => {
     let query = knex
         .select(
             'participants.participant_id',
-            'participants.timestamp',
             'participants.age',
             'participants.gender',
             'participants.relationship_status',
@@ -275,33 +274,88 @@ app.get("/viewData", (req, res) => {
     });
 });
 
-//survey page requests
+// this is for survey
 app.get("/surveyInput", (req, res) => {
     res.render(path.join(__dirname + "/views/surveyInput.ejs"));
 });
 
+//survey page requests
 app.post("/storeSurvey", (req, res) => {
-    let sOutput;
+    // const organizationMapping = {
+    //     university: '1',
+    //     private: '2',
+    //     schoolK12: '3',
+    //     company: '4',
+    //     government: '5',
+    //     other: '6'
+        knex("participants").insert({
+            age: req.body.age,
+            gender: req.body.gender,
+            relationship_status: req.body.relationship,
+            occupation_status: req.body.occupation,
+            organization_id: '1',
+            //organization_type: req.body[key] === organizationMapping[key] ? key : null
+            location: 'Provo',
+            social_media: req.body.use,
+            avg_time_spent: req.body.avgtime
+        })
 
-    sOutput = "Age: " + req.body.age;
+        // do organization table
 
-    res.send(sOutput);
-});
+        //knex("social_media_platforms").insert({
+            //facebook
+        //})
 
-app.get("/addCountry", (req, res) => {
-    res.render("addCountry");
- })
- app.post("/addCountry", (req, res)=> {
-    knex("country").insert({
-      country_name: req.body.country_name.toUpperCase(),
-      popular_site: req.body.popular_site.toUpperCase(),
-      capital: req.body.capital.toUpperCase(),
-      population: req.body.population,
-      visited: req.body.visited ? "Y" : "N",
-      covid_level: req.body.covid_level.toUpperCase()
-   }).then(mycountry => {
-      res.redirect("/");
-   })
- });
+        knex("survey_answers").insert({
+            question_id: '1',
+            answer: req.body.withPurpose,
+            question_id: '2',
+            answer: req.body.distractedBusy,
+            question_id: '3',
+            answer: req.body.restless,
+            question_id: '4',
+            answer: req.body.distracted,
+            question_id: '5',
+            answer: req.body.worries,
+            question_id: '6',
+            answer: req.body.concentrate,
+            question_id: '7',
+            answer: req.body.oftenCompare,
+            question_id: '8',
+            answer: req.body.feelCompare,
+            question_id: '9',
+            answer: req.body.validation,
+            question_id: '10',
+            answer: req.body.depressed,
+            question_id: '11',
+            answer: req.body.dailyActivity,
+            question_id: '12',
+            answer: req.body.sleep
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error storing survey data");
+        });
+    });
+
+
+    // const insertPromises = Object.keys(organizationMapping)
+    //     .filter(key => req.body[key] === organizationMapping[key])
+    //     .map(key =>
+    //         knex("participants").insert({
+    //             age: req.body.age,
+    //             gender: req.body.gender,
+    //             relationship_status: req.body.relationship,
+    //             occupation_status: req.body.occupation,
+    //             organization_id: '1'
+    //             //organization_type: req.body[key] === organizationMapping[key] ? key : null
+    //         })
+    //     );
+
+    // Promise.all(insertPromises)
+    //     .then(() => {
+    //         res.send("Survey data stored successfully!");
+    //     })
+// });
 
 app.listen(port, () => console.log("Website started"));
