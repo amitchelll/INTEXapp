@@ -1,85 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Participants Table Schema</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 50%;
-      margin-top: 20px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Participants Table Schema</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin-top: 20px;
+      }
 
-    th,
-    td {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
 
-    th {
-      background-color: #f2f2f2;
-    }
+      th {
+        background-color: #f2f2f2;
+      }
 
-    /* Add styles to highlight table rows on hover */
-    tr:hover {
-      background-color: #f5f5f5; /* Change this to the desired highlight color */
-    }
-  </style>
-</head>
-<body>
-  <form action="/viewData" method="GET">
-    <h2>Participants Table Columns</h2>
+      /* Add styles to highlight table rows on hover */
+      tr:hover {
+        background-color: #f5f5f5; /* Change this to the desired highlight color */
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/viewData" method="GET">
+      <h2>Participants Table Columns</h2>
 
-    <label for="locationSelect">Filter by Location:</label>
-    <select id="locationSelect" name="location">
-      <option value="">All Locations</option>
-      <% if (locations && locations.length > 0) { %>
-        <% locations.forEach(location => { %>
-          <% if (location === locationFilter) { %>
-            <option value="<%= location %>" selected><%= location %></option>
-          <% } else { %>
-            <option value="<%= location %>"><%= location %></option>
-          <% } %>
-        <% }); %>
-      <% } else { %>
+      <label for="locationSelect">Filter by Location:</label>
+      <select id="locationSelect" name="location">
+        <option value="">All Locations</option>
+        <% if (locations && locations.length > 0) { %> <%
+        locations.forEach(location => { %> <% if (location === locationFilter) {
+        %>
+        <option value="<%= location %>" selected><%= location %></option>
+        <% } else { %>
+        <option value="<%= location %>"><%= location %></option>
+        <% } %> <% }); %> <% } else { %>
         <option value="" disabled>No locations available</option>
-      <% } %>
-    </select>
+        <% } %>
+      </select>
 
-    <button type="submit">Apply Filter</button>
+      <button type="submit">Apply Filter</button>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Participant_ID</th>
-          <th title="Age">Age</th>
-          <th title="Gender">Gender</th>
-          <th title="Relationship Status">Relationship_status</th>
-          <th title="Occupation Status">Occupation_status</th>
-          <th title="Organization ID">Organization_ID</th>
-          <th title="Location">Location</th>
-          <th title="Social Media">Social_media</th>
-          <th title="Average Time Spent">Avg_time_spent</th>
-          <th title="Question ID: 1">Question_ID</th>
-          <th title="Answer">Answer</th>
-        </tr>
-      </thead>
-      <tbody style="font-family: Arial; font-size: 9pt;">
-        <% for (let iCount = 0; iCount < myparticipants.length; iCount++) { %>
-        <tr>
-          <td><%= myparticipants[iCount].participant_id %></td>
-          <td title="Tooltip for Age: <%= myparticipants[iCount].age %>"><%= myparticipants[iCount].age %></td>
-          <td title="Tooltip for Gender: <%= myparticipants[iCount].gender %>"><%= myparticipants[iCount].gender %></td>
-          <td title="Tooltip for Relationship Status: <%= myparticipants[iCount].relationship_status %>"><%= myparticipants[iCount].relationship_status %></td>
-          <td title="Tooltip for Occupation Status: <%= myparticipants[iCount].occupation_status %>"><%= myparticipants[iCount].occupation_status %></td>
-          <td title="Tooltip for Organization ID: <%= myparticipants[iCount].organization_id %>"><%= myparticipants[iCount].organization_id %></td>
-          <td title="Tooltip for Location: <%= myparticipants[iCount].location %>"><%= myparticipants[iCount].location %></td>
-          <td title="Tooltip for Social Media: <%= myparticipants[iCount].social_media %>"><%= myparticipants[iCount].social_media %></td>
-          <td title="Tooltip for Average Time Spent: <%= myparticipants[iCount].avg_time_spent %>"><%= myparticipants[iCount].avg_time_spent %></td>
-          <td title="<%= myparticipants[iCount].question_id === 1 ? 'How often do you find yourself using social media without a specific purpose?' : 
+      <table>
+        <thead>
+          <tr>
+            <th>Participant_ID</th>
+            <th title="Age">Age</th>
+            <th title="Gender">Gender</th>
+            <th title="Relationship Status">Relationship_status</th>
+            <th title="Occupation Status">Occupation_status</th>
+            <th title="Organization ID">Organization_ID</th>
+            <th title="Location">Location</th>
+            <th title="Social Media">Social_media</th>
+            <th title="Average Time Spent">Avg_time_spent</th>
+            <th title="Question ID: 1">Question_ID</th>
+            <th title="Answer">Answer</th>
+          </tr>
+        </thead>
+        <tbody style="font-family: Arial; font-size: 9pt">
+          % let previousParticipantId = null; %> <% for (let iCount = 0; iCount
+          < myparticipants.length; iCount++) { %> <% const currentParticipantId
+          = myparticipants[iCount].participant_id; %>
+          <tr
+            class="<%= previousParticipantId !== null && currentParticipantId !== previousParticipantId ? 'change' : '' %>"
+          >
+            <td><%= currentParticipantId %></td>
+            <td title="Tooltip for Age: <%= myparticipants[iCount].age %>"></td>
+            <td
+              title="Tooltip for Gender: <%= myparticipants[iCount].gender %>"
+            >
+              <%= myparticipants[iCount].gender %>
+            </td>
+            <td
+              title="Tooltip for Relationship Status: <%= myparticipants[iCount].relationship_status %>"
+            >
+              <%= myparticipants[iCount].relationship_status %>
+            </td>
+            <td
+              title="Tooltip for Occupation Status: <%= myparticipants[iCount].occupation_status %>"
+            >
+              <%= myparticipants[iCount].occupation_status %>
+            </td>
+            <td
+              title="Tooltip for Organization ID: <%= myparticipants[iCount].organization_id %>"
+            >
+              <%= myparticipants[iCount].organization_id %>
+            </td>
+            <td
+              title="Tooltip for Location: <%= myparticipants[iCount].location %>"
+            >
+              <%= myparticipants[iCount].location %>
+            </td>
+            <td
+              title="Tooltip for Social Media: <%= myparticipants[iCount].social_media %>"
+            >
+              <%= myparticipants[iCount].social_media %>
+            </td>
+            <td
+              title="Tooltip for Average Time Spent: <%= myparticipants[iCount].avg_time_spent %>"
+            >
+              <%= myparticipants[iCount].avg_time_spent %>
+            </td>
+            <td
+              title="<%= myparticipants[iCount].question_id === 1 ? 'How often do you find yourself using social media without a specific purpose?' : 
                        myparticipants[iCount].question_id === 2 ? 'How often do you get distracted by social media when you are busy doing something?' :
                        myparticipants[iCount].question_id === 3 ? 'Do you feel restless if you haven't used social media in a while?' :
                        myparticipants[iCount].question_id === 4 ? 'How easily distracted are you?' :
@@ -90,17 +121,18 @@
                        myparticipants[iCount].question_id === 9 ? 'How often do you look to seek validation from features of social media?' :
                        myparticipants[iCount].question_id === 10 ? 'How often do you feel depressed or down?' :
                        myparticipants[iCount].question_id === 11 ? 'How frequently does your interested in daily activities fluctuate?' :
-                       myparticipants[iCount].question_id === 12 ? 'How often do you face issues regarding sleep?' : 'Default Tooltip' %>">
-            <%= myparticipants[iCount].question_id %>
-          </td>
-          <td><%= myparticipants[iCount].answer %></td>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </form>
+                       myparticipants[iCount].question_id === 12 ? 'How often do you face issues regarding sleep?' : 'Default Tooltip' %>"
+            >
+              <%= myparticipants[iCount].question_id %>
+            </td>
+            <td><%= myparticipants[iCount].answer %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </form>
 
-<!-- Include jQuery -->
+  <!-- Include jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
@@ -110,8 +142,7 @@
         // Make an AJAX request to the server
         $.get(`/viewData?location=${selectedLocation}`, function (data) {
           $('#filtered').html(data);
-        });
       });
     });
-  </script>
-</body>
+  });
+</script>

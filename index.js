@@ -281,32 +281,34 @@ app.get("/surveyInput", (req, res) => {
 
 //survey page requests
 app.post("/storeSurvey", (req, res) => {
-    // const organizationMapping = {
-    //     university: '1',
-    //     private: '2',
-    //     schoolK12: '3',
-    //     company: '4',
-    //     government: '5',
-    //     other: '6'
-        knex("participants").insert({
+    const participantsData = {
+        timestamp: knex.fn.now(),
+        location: "Provo",
             timestamp: knex.fn.now(),
+            location: "Provo",
             age: req.body.age,
-            gender: req.body.gender,
-            relationship_status: req.body.relationship,
-            occupation_status: req.body.occupation,
-            organization_id: req.body.orgType,
-            social_media: req.body.use,
-            avg_time_spent: req.body.avgtime,
-            location: "Provo"
+            gender : req.body.gender,
+            relationship_status : req.body.relationship_status,
+            occupation_status : req.body.occupation_status, 
+            organization_id : req.body.organization_id, 
+            social_media : req.body.social_media, 
+            avg_time_spent : req.body.avg_time_spent
+        }
+    const surveyData = {
+
+    } 
+    knex("participants")
+        .insert(participantsData)
+        .then(() => {
+            res.redirect("/");
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error storing survey data");
+        });
         })
 
-        .then(() => {
-
-        // do organization table
-
-        //knex("social_media_platforms").insert({
-            //facebook
-        //})
+    
 
         return knex("survey_answers").insert(
             {question_id: '1', answer: req.body.withPurpose},
@@ -323,17 +325,6 @@ app.post("/storeSurvey", (req, res) => {
             {question_id: '12', answer: req.body.sleep}
         
         );
-    })
-
-        .then(() => {         res.send("Survey data stored successfully!");     
-        })
-
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error storing survey data");
-        });
-    
-    });
 
     // const insertPromises = Object.keys(organizationMapping)
     //     .filter(key => req.body[key] === organizationMapping[key])
@@ -352,3 +343,17 @@ app.post("/storeSurvey", (req, res) => {
 
 
 app.listen(port, () => console.log("Website started"));
+
+
+  // do organization table
+
+        //knex("social_media_platforms").insert({
+            //facebook
+        //})
+            // const organizationMapping = {
+    //     university: '1',
+    //     private: '2',
+    //     schoolK12: '3',
+    //     company: '4',
+    //     government: '5',
+    //     other: '6'
