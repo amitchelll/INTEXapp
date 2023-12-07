@@ -308,18 +308,7 @@ app.post("/storeSurvey", (req, res) => {
         .then(() => {
             // Redirect only after the participantsData has been inserted
             // Otherwise, it might redirect before the socialMediaData is inserted
-            res.redirect("/");
-
-            // this is for socialMedia
-            knex("social_media_platforms")
-                .insert(socialMediaData)
-                .then(() => {
-                    console.log("Survey data stored successfully");
-                })
-                .catch((error) => {
-                    console.error(error);
-                    res.status(500).send("Error storing social media data");
-                });
+            res.redirect("/");           
         })
         .catch((error) => {
             console.error(error);
