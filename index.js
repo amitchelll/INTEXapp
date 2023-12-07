@@ -307,7 +307,7 @@ app.post("/storeSurvey", (req, res) => {
         });
         })
 
-        app.listen(port, () => console.log("Website started"));
+    app.listen(port, () => console.log("Website started"));
 
 
         // return knex("survey_answers").insert(
@@ -326,7 +326,6 @@ app.post("/storeSurvey", (req, res) => {
         
         // );
 
-    app.listen(port, () => console.log("Website started"));
 
 
     // const insertPromises = Object.keys(organizationMapping)
