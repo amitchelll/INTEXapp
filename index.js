@@ -108,7 +108,7 @@ const knex = require("knex")({ // this is the database
         password: process.env.RDS_PASSWORD || "password",
         database: process.env.RDS_DB_NAME || "ebdb",
         port: process.env.RDS_PORT || 5432,
-        ssl: process.env.DB_SSL ? {rejectUnauthorized: false} : false
+        ssl: {rejectUnauthorized: false},
     }
 })
 
@@ -278,6 +278,7 @@ app.get("/viewData", (req, res) => {
 app.get("/surveyInput", (req, res) => {
     res.render(path.join(__dirname + "/views/surveyInput.ejs"));
 });
+// ... (other code remains unchanged)
 
 //survey page requests
 app.post("/storeSurvey", (req, res) => {
@@ -285,45 +286,98 @@ app.post("/storeSurvey", (req, res) => {
         timestamp: knex.fn.now(),
         location: "Provo",
         age: req.body.age,
-        gender : req.body.gender,
-        relationship_status : req.body.relationship_status,
-        occupation_status : req.body.occupation_status, 
-        organization_id : req.body.organization_id, 
-        social_media : req.body.social_media, 
-        avg_time_spent : req.body.avg_time_spent
-        }
+        gender: req.body.gender,
+        relationship_status: req.body.relationship_status,
+        occupation_status: req.body.occupation_status,
+        organization_id: req.body.organization_id,
+        social_media: req.body.social_media,
+        avg_time_spent: req.body.avg_time_spent
+    };
+
     const socialMediaData = {
-        facebook : req.body.facebook,
-        twitter : req.body.twitter, 
-        instagram : req.body.instagram, 
-        youtube : req.body.youtube,
-        discord : req.body.discord, 
-        reddit : req.body.reddit, 
-        pinterest : req.body.pinterest, 
-        snapchat : req.body.snapchat,
-        tiktok : req.body.tiktok
-    } 
+        facebook: req.body.facebook,
+        twitter: req.body.twitter,
+        instagram: req.body.instagram,
+        youtube: req.body.youtube,
+        discord: req.body.discord,
+        reddit: req.body.reddit,
+        pinterest: req.body.pinterest,
+        snapchat: req.body.snapchat,
+        tiktok: req.body.tiktok
+    };
+
     // this is for participants
     knex("participants")
         .insert(participantsData)
         .then(() => {
+            // Redirect only after the participantsData has been inserted
+            // Otherwise, it might redirect before the socialMediaData is inserted
             res.redirect("/");
-        })
-       
 
-        // this is for socialMedia
-        knex("social_media_platforms")
-        .insert(socialMediaData)
-        .then(() => {
-            res.redirect("/");
+            // this is for socialMedia
+            knex("social_media_platforms")
+                .insert(socialMediaData)
+                .then(() => {
+                    console.log("Survey data stored successfully");
+                })
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send("Error storing social media data");
+                });
         })
         .catch((error) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
         });
+});
+
+// ... (other code remains unchanged)
+
+// //survey page requests
+// app.post("/storeSurvey", (req, res) => {
+//     const participantsData = {
+//         timestamp: knex.fn.now(),
+//         location: "Provo",
+//         age: req.body.age,
+//         gender : req.body.gender,
+//         relationship_status : req.body.relationship_status,
+//         occupation_status : req.body.occupation_status, 
+//         organization_id : req.body.organization_id, 
+//         social_media : req.body.social_media, 
+//         avg_time_spent : req.body.avg_time_spent
+//         }
+//     const socialMediaData = {
+//         facebook : req.body.facebook,
+//         twitter : req.body.twitter, 
+//         instagram : req.body.instagram, 
+//         youtube : req.body.youtube,
+//         discord : req.body.discord, 
+//         reddit : req.body.reddit, 
+//         pinterest : req.body.pinterest, 
+//         snapchat : req.body.snapchat,
+//         tiktok : req.body.tiktok
+//     } 
+//     // this is for participants
+//     knex("participants")
+//         .insert(participantsData)
+//         .then(() => {
+//             res.redirect("/");
+//         })
+       
+
+//         // this is for socialMedia
+//         knex("social_media_platforms")
+//         .insert(socialMediaData)
+//         .then(() => {
+//             res.redirect("/");
+//         })
+//         .catch((error) => {
+//             console.error(error);
+//             res.status(500).send("Error storing survey data");
+//         });
 
 
-        })
+//         })
 
     app.listen(port, () => console.log("Website started"));
 
