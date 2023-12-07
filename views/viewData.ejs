@@ -132,19 +132,19 @@
       </table>
     </form>
 
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#applyFilter").on("click", function () {
-          const selectedLocation = $("#locationSelect").val();
-
-          // Make an AJAX request to the server
-          $.get(`/viewData?location=${selectedLocation}`, function (data) {
-            $("#filtered").html(data);
-          });
-        });
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#applyFilter').on('click', function () {
+        const selectedLocation = $('#locationSelect').val();
+        
+        // Make an AJAX request to the server
+        $.get(`/viewData?location=${selectedLocation}`, function (data) {
+          $('#filtered').html(data);
       });
-    </script>
-  </body>
+    });
+  });
+</script>
+</body>
 </html>
