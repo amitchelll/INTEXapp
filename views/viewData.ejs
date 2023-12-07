@@ -66,14 +66,16 @@
           </tr>
         </thead>
         <tbody style="font-family: Arial; font-size: 9pt">
-          % let previousParticipantId = null; %> <% for (let iCount = 0; iCount
+          <% let previousParticipantId = null; %> <% for (let iCount = 0; iCount
           < myparticipants.length; iCount++) { %> <% const currentParticipantId
           = myparticipants[iCount].participant_id; %>
           <tr
             class="<%= previousParticipantId !== null && currentParticipantId !== previousParticipantId ? 'change' : '' %>"
           >
             <td><%= currentParticipantId %></td>
-            <td title="Tooltip for Age: <%= myparticipants[iCount].age %>"></td>
+            <td title="Tooltip for Age: <%= myparticipants[iCount].age %>">
+              <%= myparticipants[iCount].age %>
+            </td>
             <td
               title="Tooltip for Gender: <%= myparticipants[iCount].gender %>"
             >
@@ -111,40 +113,43 @@
             </td>
             <td
               title="<%= myparticipants[iCount].question_id === 1 ? 'How often do you find yourself using social media without a specific purpose?' : 
-                       myparticipants[iCount].question_id === 2 ? 'How often do you get distracted by social media when you are busy doing something?' :
-                       myparticipants[iCount].question_id === 3 ? 'Do you feel restless if you haven't used social media in a while?' :
-                       myparticipants[iCount].question_id === 4 ? 'How easily distracted are you?' :
-                       myparticipants[iCount].question_id === 5 ? 'How much are you bothered by worries?' :
-                       myparticipants[iCount].question_id === 6 ? 'Do you find it difficult to concentrate on things?' :
-                       myparticipants[iCount].question_id === 7 ? 'How often do you compare yourself to other successful people through the use of social media?' :
-                       myparticipants[iCount].question_id === 8 ? 'Following the previous question, how do you feel about these comparisons, generally speaking?' :
-                       myparticipants[iCount].question_id === 9 ? 'How often do you look to seek validation from features of social media?' :
-                       myparticipants[iCount].question_id === 10 ? 'How often do you feel depressed or down?' :
-                       myparticipants[iCount].question_id === 11 ? 'How frequently does your interested in daily activities fluctuate?' :
-                       myparticipants[iCount].question_id === 12 ? 'How often do you face issues regarding sleep?' : 'Default Tooltip' %>"
+                           myparticipants[iCount].question_id === 2 ? 'How often do you get distracted by social media when you are busy doing something?' :
+                           myparticipants[iCount].question_id === 3 ? 'Do you feel restless if you haven't used social media in a while?' :
+                           myparticipants[iCount].question_id === 4 ? 'How easily distracted are you?' :
+                           myparticipants[iCount].question_id === 5 ? 'How much are you bothered by worries?' :
+                           myparticipants[iCount].question_id === 6 ? 'Do you find it difficult to concentrate on things?' :
+                           myparticipants[iCount].question_id === 7 ? 'How often do you compare yourself
+                           myparticipants[iCount].question_id === 8 ? 'Following the previous question, how do you feel about these comparisons, generally speaking?' :
+                           myparticipants[iCount].question_id === 9 ? 'How often do you look to seek validation from features of social media?' :
+                           myparticipants[iCount].question_id === 10 ? 'How often do you feel depressed or down?' :
+                           myparticipants[iCount].question_id === 11 ? 'How frequently does your interested in daily activities fluctuate?' :
+                           myparticipants[iCount].question_id === 12 ? 'How often do you face issues regarding sleep?' : 'Default Tooltip' %>"
+            ></td>
+
+            <td
+              title="Tooltip for Answer: <%= myparticipants[iCount].answer %>"
             >
-              <%= myparticipants[iCount].question_id %>
+              <%= myparticipants[iCount].answer %>
             </td>
-            <td><%= myparticipants[iCount].answer %></td>
           </tr>
-          <% } %>
+          <% previousParticipantId = currentParticipantId; %> <% } %>
         </tbody>
       </table>
     </form>
 
-  <!-- Include jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#applyFilter').on('click', function () {
-        const selectedLocation = $('#locationSelect').val();
-        
-        // Make an AJAX request to the server
-        $.get(`/viewData?location=${selectedLocation}`, function (data) {
-          $('#filtered').html(data);
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#applyFilter").on("click", function () {
+          const selectedLocation = $("#locationSelect").val();
+
+          // Make an AJAX request to the server
+          $.get(`/viewData?location=${selectedLocation}`, function (data) {
+            $("#filteredContent").html(data);
+          });
+        });
       });
-    });
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>
