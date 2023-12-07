@@ -5,8 +5,18 @@ let app = express();
 let path = require("path");
 
 const port = process.env.PORT || 3002;
+
 const bcrypt = require('bcrypt')
 
+const session = require('express-session')
+
+const flash = require('express-flash')
+
+const passport = require('passport')
+
+initialize(passport)
+
+//middleware
 app.set("view engine", "ejs")
 
 app.use(express.urlencoded({extended: true}));
@@ -21,6 +31,74 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Internal Server Error');
 });
+
+app.use(session({
+    secret: 'secret', 
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+
+app.use(passport.session())
+
+app.use(flash({
+    
+}))
+
+//passport stuff
+    //const {pool} = require("./dbConfig");
+function initialize(passport) {
+
+    const authenticateUser = (username, password, done) => {
+        knex.raw(
+            `SELECT * FROM login WHERE username = $1`, [username], (err, results)=> {
+                if(err){
+                    throw err;
+                }
+                console.log(results.rows)
+                if (results.rows.length > 0) {
+                    const user = results.rows[0];
+
+                    bcrypt.compare(password, user.password, (err, isMatch)=> {
+                        if (err){
+                            throw err
+                        }
+                        if (isMatch){
+                            return done(null, user)
+                        } else{
+                            return done(null, false, {message: "Password is not correct."})
+                        }
+                    })
+                } else {
+                    return done(null, false, {message: "User is not registered."})
+                }
+            } 
+        )
+    }
+    const LocalStrategy = require("passport-local").Strategy;
+    passport.use(
+        new LocalStrategy(
+            {
+                usernameField: "username",
+                passwordField: "password"
+            }, 
+            authenticateUser
+        )
+    );
+    passport.serializeUser((user, done) => done(null, user.id));
+    passport.deserializeUser((id, done) => {
+        knex.raw(`SELECT * FROM login WHERE id = $1`, [id], (err, results)=> {
+            if (err){
+                throw err
+            }
+            return done(null, results.rows[0]);
+        })
+    })
+}
+
+module.exports = initialize
+
 
 const knex = require("knex")({ // this is the database
     client: "pg",
@@ -44,17 +122,27 @@ app.get("/resources", (req, res) => {
 });
 
 //dashboard test requests
-app.get("/dashboardtest", (req, res) => {
-    res.render("dashboardtest", { user: "Conner" });
+app.get("/dashboardtest", checkNotAuthenticated, (req, res) => {
+    res.render("dashboardtest", { user: req.user.first_name });
   });
+
+  app.get('/logout', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
+  });
+
   
 //login page requests
-app.get("/login", (req, res) => {
+app.get("/login", checkAuthenticated, (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
 });
 
 //create account page requests
-app.get("/createAccount", (req, res) => {
+app.get("/createAccount", checkAuthenticated, (req, res) => {
     res.render(path.join(__dirname + "/views/createAccount.ejs"));
 });
 app.post("/createAccount", async (req, res) => {
@@ -87,7 +175,7 @@ app.post("/createAccount", async (req, res) => {
         let hashedPassword = await bcrypt.hash(password, 10)
         console.log(hashedPassword);
 
-    pool.query(
+    knex.raw(
         'SELECT * FROM login WHERE username = $1', [username], (err, results) => {
             if (err){
                 throw err
@@ -98,12 +186,43 @@ app.post("/createAccount", async (req, res) => {
             if (results.rows.length > 0){
                 errors.push({message: "User already registered"});
                 res.render('/createAccount', { errors })
+            }else {
+                knex.raw(`INSERT INTO login (first_name, last_name, username, password)
+                VALUES ($1, $2, $3, $4)
+                RETURNING id, password`, [first_name, last_name, username, hashedPassword], (err, results) => {
+                    if (err){
+                        throw err 
+                    }
+                    console.log(results.rows);
+                    req.flash('success_msg', "You have created an account successfully. Please log in!")
+                    res.redirect('/login')
+                })
             }
         }
     )
     }
 
 });
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/dashboardtest',
+    failureRedirect: '/login', 
+    failureFlash: true
+}));
+
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()){
+        return res.redirect('/dashboardtest')
+    }
+    next();
+}
+
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()){
+        return next()
+    }
+    res.redirect('/login')
+}
 
 //adminaccess.ejs
 app.get("/adminaccess", (req, res) => {
@@ -174,8 +293,8 @@ app.post("/storeSurvey", (req, res) => {
             gender: req.body.gender,
             relationship_status: req.body.relationship,
             occupation_status: req.body.occupation,
-            organization_id: '1',
-            //organization_type: req.body[key] === organizationMapping[key] ? key : null
+            // organization_id: req.body.orgType,
+            organization_type: req.body.orgType,
             location: 'Provo',
             social_media: req.body.use,
             avg_time_spent: req.body.avgtime
