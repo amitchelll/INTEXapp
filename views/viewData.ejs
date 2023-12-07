@@ -100,7 +100,7 @@
     </table>
   </form>
 
-  <!-- Include jQuery -->
+<!-- Include jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
@@ -110,7 +110,8 @@
         // Make an AJAX request to the server
         $.get(`/viewData?location=${selectedLocation}`, function (data) {
           $('#filtered').html(data);
+        });
       });
     });
-  });
-</script>
+  </script>
+</body>
