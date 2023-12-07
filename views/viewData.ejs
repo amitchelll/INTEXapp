@@ -66,9 +66,9 @@
           </tr>
         </thead>
         <tbody style="font-family: Arial; font-size: 9pt">
-          <% let previousParticipantId = null; %> <% for (let iCount = 0; iCount
-          < myparticipants.length; iCount++) { %> <% const currentParticipantId
-          = myparticipants[iCount].participant_id; %>
+          <% let previousParticipantId = null; %> <% for (let iCount = 0;
+          myparticipants.length; iCount++) { %> <% const currentParticipantId =
+          myparticipants[iCount].participant_id; %>
           <tr
             class="<%= previousParticipantId !== null && currentParticipantId !== previousParticipantId ? 'change' : '' %>"
           >
