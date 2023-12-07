@@ -300,13 +300,15 @@ app.post("/storeSurvey", (req, res) => {
             avg_time_spent: req.body.avgtime
         })
 
+        .then(() => {
+
         // do organization table
 
         //knex("social_media_platforms").insert({
             //facebook
         //})
 
-        knex("survey_answers").insert({
+        return knex("survey_answers").insert({
             question_id: '1',
             answer: req.body.withPurpose,
             question_id: '2',
@@ -331,9 +333,10 @@ app.post("/storeSurvey", (req, res) => {
             answer: req.body.dailyActivity,
             question_id: '12',
             answer: req.body.sleep
-        })
+        });
+    })
 
-        .then(() => {         res.send("Survey data stored successfully!");     
+        .then(() => {res.send("Survey data stored successfully!");     
         })
 
         .catch((error) => {
