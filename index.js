@@ -239,22 +239,9 @@ const locationsArray = ['Plainsville', 'Provo'];
 
 app.get("/viewData", (req, res) => {
     let query = knex
-        .select(
-            'participants.participant_id',
-            'participants.age',
-            'participants.gender',
-            'participants.relationship_status',
-            'participants.occupation_status',
-            'participants.organization_id',
-            'participants.location',
-            'participants.social_media',
-            'participants.avg_time_spent',
-            'survey_answers.question_id',
-            'survey_answers.answer'
-        )
+        .select()
         .from("participants")
-        .innerJoin('survey_answers', 'participants.participant_id', 'survey_answers.participant_id')
-        .innerJoin('survey_questions', 'survey_answers.question_id', 'survey_questions.question_id');
+        .innerjoin("social_media_platforms", "participants.participant_id", "social_media_platforms.participant_id")
         
     // Extract the location filter value from the request query
     const locationFilter = req.query.location;
@@ -278,7 +265,6 @@ app.get("/viewData", (req, res) => {
 app.get("/surveyInput", (req, res) => {
     res.render(path.join(__dirname + "/views/surveyInput.ejs"));
 });
-// ... (other code remains unchanged)
 
 //survey page requests
 app.post("/storeSurvey", (req, res) => {
@@ -289,12 +275,21 @@ app.post("/storeSurvey", (req, res) => {
         gender: req.body.gender,
         relationship_status: req.body.relationship_status,
         occupation_status: req.body.occupation_status,
-        organization_id: req.body.organization_id,
         social_media: req.body.social_media,
-        avg_time_spent: req.body.avg_time_spent
-    };
-
-    const socialMediaData = {
+        avg_time_spent: req.body.avg_time_spent,
+        withoutpurpose: req.body.withoutpurpose,
+        distractedbusy: req.body.distractedbusy,
+        restless: req.body.restless,
+        distracted: req.body.distracted,
+        worries: req.body.worries,
+        organization: req.body.organization,
+        concentrate: req.body.concentrate,
+        oftencompare: req.body.oftencompare,
+        feelcompare: req.body.feelcompare,
+        validation: req.body.validation,
+        depressed: req.body.depressed,
+        dailyactivity: req.body.dailyactivity,
+        sleep: req.body.sleep,
         facebook: req.body.facebook,
         twitter: req.body.twitter,
         instagram: req.body.instagram,
@@ -306,21 +301,6 @@ app.post("/storeSurvey", (req, res) => {
         tiktok: req.body.tiktok
     };
 
-    const surveyData = {
-           question_id: '1', answer: req.body.withpurpos,
-            question_id: '2', answer: req.body.distractedBusy,
-            question_id: '3', answer: req.body.restless,
-            question_id: '4', answer: req.body.distracted,
-            question_id: '5', answer: req.body.worries,
-            question_id: '6', answer: req.body.concentrate,
-            question_id: '7', answer: req.body.oftenCompare,
-            question_id: '8', answer: req.body.feelCompare,
-            question_id: '9', answer: req.body.validation,
-            question_id: '10', answer: req.body.depressed,
-            question_id: '11', answer: req.body.dailyActivity,
-            question_id: '12', answer: req.body.sleep
-        
-    };
 
     // this is for participants
     knex("participants")
@@ -340,16 +320,6 @@ app.post("/storeSurvey", (req, res) => {
                     console.error(error);
                     res.status(500).send("Error storing social media data");
                 });
-        
-                knex("survey_answers")
-                .insert(surveyData)
-                .then(() => {
-                    console.log("Survey data stored successfully");
-                })
-                .catch((error) => {
-                    console.error(error);
-                    res.status(500).send("Error storing social media data");
-                });
         })
         .catch((error) => {
             console.error(error);
@@ -357,100 +327,4 @@ app.post("/storeSurvey", (req, res) => {
         });
 });
 
-// ... (other code remains unchanged)
-
-// //survey page requests
-// app.post("/storeSurvey", (req, res) => {
-//     const participantsData = {
-//         timestamp: knex.fn.now(),
-//         location: "Provo",
-//         age: req.body.age,
-//         gender : req.body.gender,
-//         relationship_status : req.body.relationship_status,
-//         occupation_status : req.body.occupation_status, 
-//         organization_id : req.body.organization_id, 
-//         social_media : req.body.social_media, 
-//         avg_time_spent : req.body.avg_time_spent
-//         }
-//     const socialMediaData = {
-//         facebook : req.body.facebook,
-//         twitter : req.body.twitter, 
-//         instagram : req.body.instagram, 
-//         youtube : req.body.youtube,
-//         discord : req.body.discord, 
-//         reddit : req.body.reddit, 
-//         pinterest : req.body.pinterest, 
-//         snapchat : req.body.snapchat,
-//         tiktok : req.body.tiktok
-//     } 
-//     // this is for participants
-//     knex("participants")
-//         .insert(participantsData)
-//         .then(() => {
-//             res.redirect("/");
-//         })
-       
-
-//         // this is for socialMedia
-//         knex("social_media_platforms")
-//         .insert(socialMediaData)
-//         .then(() => {
-//             res.redirect("/");
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//             res.status(500).send("Error storing survey data");
-//         });
-
-
-//         })
-
     app.listen(port, () => console.log("Website started"));
-
-
-        // return knex("survey_answers").insert(
-        //     {question_id: '1', answer: req.body.withPurpose},
-        //     {question_id: '2', answer: req.body.distractedBusy},
-        //     {question_id: '3', answer: req.body.restless},
-        //     {question_id: '4', answer: req.body.distracted},
-        //     {question_id: '5', answer: req.body.worries},
-        //     {question_id: '6', answer: req.body.concentrate},
-        //     {question_id: '7', answer: req.body.oftenCompare},
-        //     {question_id: '8', answer: req.body.feelCompare},
-        //     {question_id: '9', answer: req.body.validation},
-        //     {question_id: '10', answer: req.body.depressed},
-        //     {question_id: '11', answer: req.body.dailyActivity},
-        //     {question_id: '12', answer: req.body.sleep}
-        
-        // );
-
-
-
-    // const insertPromises = Object.keys(organizationMapping)
-    //     .filter(key => req.body[key] === organizationMapping[key])
-    //     .map(key =>
-    //         knex("participants").insert({
-    //             age: req.body.age,
-    //             gender: req.body.gender,
-    //             relationship_status: req.body.relationship,
-    //             occupation_status: req.body.occupation,
-    //             organization_id: '1'
-    //             //organization_type: req.body[key] === organizationMapping[key] ? key : null
-    //         })
-    //     );
-
-    // Promise.all(insertPromises)
-
-
-  // do organization table
-
-        //knex("social_media_platforms").insert({
-            //facebook
-        //})
-            // const organizationMapping = {
-    //     university: '1',
-    //     private: '2',
-    //     schoolK12: '3',
-    //     company: '4',
-    //     government: '5',
-    //     other: '6'
