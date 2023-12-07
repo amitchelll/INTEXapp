@@ -213,6 +213,10 @@ app.post("/storeSurvey", (req, res) => {
             question_id: '12',
             answer: req.body.sleep
         })
+
+        .then(() => {         res.send("Survey data stored successfully!");     
+        })
+
         .catch((error) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
@@ -234,9 +238,6 @@ app.post("/storeSurvey", (req, res) => {
     //     );
 
     // Promise.all(insertPromises)
-    //     .then(() => {
-    //         res.send("Survey data stored successfully!");
-    //     })
-// });
+
 
 app.listen(port, () => console.log("Website started"));
