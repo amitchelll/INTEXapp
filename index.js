@@ -306,32 +306,20 @@ app.post("/storeSurvey", (req, res) => {
             //facebook
         //})
 
-        knex("survey_answers").insert({
-            question_id: '1',
-            answer: req.body.withPurpose,
-            question_id: '2',
-            answer: req.body.distractedBusy,
-            question_id: '3',
-            answer: req.body.restless,
-            question_id: '4',
-            answer: req.body.distracted,
-            question_id: '5',
-            answer: req.body.worries,
-            question_id: '6',
-            answer: req.body.concentrate,
-            question_id: '7',
-            answer: req.body.oftenCompare,
-            question_id: '8',
-            answer: req.body.feelCompare,
-            question_id: '9',
-            answer: req.body.validation,
-            question_id: '10',
-            answer: req.body.depressed,
-            question_id: '11',
-            answer: req.body.dailyActivity,
-            question_id: '12',
-            answer: req.body.sleep
-        })
+        knex("survey_answers").insert(
+            {question_id: '1', answer: req.body.withPurpose},
+            {question_id: '2', answer: req.body.distractedBusy},
+            {question_id: '3', answer: req.body.restless},
+            {question_id: '4', answer: req.body.distracted},
+            {question_id: '5', answer: req.body.worries},
+            {question_id: '6', answer: req.body.concentrate},
+            {question_id: '7', answer: req.body.oftenCompare},
+            {question_id: '8', answer: req.body.feelCompare},
+            {question_id: '9', answer: req.body.validation},
+            {question_id: '10', answer: req.body.depressed},
+            {question_id: '11', answer: req.body.dailyActivity},
+            {question_id: '12', answer: req.body.sleep}
+        )
 
         .then(() => { res.send("Survey data stored successfully!");     
         })
@@ -340,8 +328,8 @@ app.post("/storeSurvey", (req, res) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
         });
+    
     });
-
 
     // const insertPromises = Object.keys(organizationMapping)
     //     .filter(key => req.body[key] === organizationMapping[key])
