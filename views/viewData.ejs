@@ -109,4 +109,8 @@
         
         // Make an AJAX request to the server
         $.get(`/viewData?location=${selectedLocation}`, function (data) {
-          $('#filtered'})
+          $('#filtered').html(data);
+      });
+    });
+  });
+</script>
