@@ -294,7 +294,17 @@ app.post("/storeSurvey", (req, res) => {
         social_media : req.body.social_media, 
         avg_time_spent : req.body.avg_time_spent
         }
-    const surveyData = {} 
+    const socialMediaData = {
+        facebook : req.body.facebook,
+        twitter : req.body.twitter, 
+        instagram : req.body.instagram, 
+        youtube : req.body.youtube,
+        discord : req.body.discord, 
+        reddit : req.body.reddit, 
+        pinterest : req.body.pinterest, 
+        snapchat : req.body.snapchat,
+        tiktok : req.body.tiktok
+    } 
 
     knex("participants")
         .insert(participantsData)
@@ -305,7 +315,6 @@ app.post("/storeSurvey", (req, res) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
         });
-
         console.log(participantsData);
         })
 
