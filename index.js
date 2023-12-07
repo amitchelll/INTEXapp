@@ -309,10 +309,7 @@ app.post("/storeSurvey", (req, res) => {
         .then(() => {
             res.redirect("/");
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error storing survey data");
-        });
+       
         console.log(participantsData);
 
         // this is for socialMedia
