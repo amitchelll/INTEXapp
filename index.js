@@ -303,7 +303,7 @@ app.post("/storeSurvey", (req, res) => {
         snapchat : req.body.snapchat,
         tiktok : req.body.tiktok
     } 
-
+    // this is for participants
     knex("participants")
         .insert(participantsData)
         .then(() => {
@@ -314,6 +314,19 @@ app.post("/storeSurvey", (req, res) => {
             res.status(500).send("Error storing survey data");
         });
         console.log(participantsData);
+
+        // this is for socialMedia
+        knex("social_media_platforms")
+        .insert(socialMediaData)
+        .then(() => {
+            res.redirect("/");
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error storing survey data");
+        });
+        console.log(participantsData);
+
         })
 
     app.listen(port, () => console.log("Website started"));
