@@ -101,7 +101,7 @@ module.exports = initialize
 
 
 const knex = require("knex")({ // this is the database
-        client: "pg",
+        client: "pg",
         connection: {
             host: process.env.RDS_HOSTNAME || "mental-health.c5d3qntj7b7x.us-east-1.rds.amazonaws.com", 
             user: process.env.RDS_USERNAME || "postgres",
