@@ -113,23 +113,24 @@
                                     <legend>Personal Information</legend>
                                     <label>What type of organizations are you affiliated with?</label>
                                     <br>
-                                    <input type="checkbox" id="cbUniversity" name="organization_id" value="1">
-                                    <label for="cbUniversity">University</label>
+                                    <input type="radio" id="rbUniversity" name="organization_id" value="1">
+                                    <label for="rbUniversity">University</label><br>
                                     <br>
-                                    <input type="checkbox" id="cbPrivate" name="organization_id" value="2">
-                                    <label for="cbPrivate">Private</label>
+                                    <input type="radio" id="rbPrivate" name="organization_id" value="1">
+                                    <label for="rbPrivate">Private</label><br>
                                     <br>
-                                    <input type="checkbox" id="cbK12" name="organization_id" value="3">
-                                    <label for="cbk12">schoolK12</label>
+                                    <input type="radio" id="rbK12" name="organization_id" value="1">
+                                    <label for="rbK12">School K-12</label><br>
                                     <br>
-                                    <input type="checkbox" id="cbCompany" name="organization_id" value="4">
-                                    <label for="cbCompany">Company</label>
+                                    <input type="radio" id="rbCompany" name="organization_id" value="1">
+                                    <label for="rbCompany">Compant</label><br>
                                     <br>
-                                    <input type="checkbox" id="cbGovernment" name="organization_id" value="5">
-                                    <label for="cbGovernment">Government</label>
+                                    <input type="radio" id="rbGovernment" name="organization_id" value="1">
+                                    <label for="rbGovernment">Government</label><br>
                                     <br>
-                                    <input type="checkbox" id="cbOther" name="organization_id" value="6">
-                                    <label for="cbOther">Other</label><br><br>
+                                    <input type="radio" id="rbOther" name="organization_id" value="1">
+                                    <label for="rbOther">Other</label><br>
+                                    <br><br>
                                     <button type="button" class="btn btn-primary btn-xl" onclick="nextQuestion()">Next Question</button>
                                 </div>
                                 <div class="question-container" id="question6">
@@ -379,7 +380,6 @@
                                     <label for="rbdepressed5">5 (very often)</label><br><br>
                                     <button type="button" class="btn btn-primary btn-xl" onclick="nextQuestion()">Next Question</button>
                                 </div>
-                                
                                 <div class="question-container" id="question19">
                                     <legend>Social Media Questions</legend>
                                     <label>How frequently does your interested in daily activities fluctuate?</label>
