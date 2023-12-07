@@ -269,7 +269,7 @@ app.get("/viewData", (req, res) => {
         res.render("viewData", { myparticipants: participants, locations: locationsArray, locationFilter: locationFilter  });
     }).catch(error => {
       // Handle errors
-      console.log('Selected Location:', selectedLocation);
+    //   console.log('Selected Location:', selectedLocation);
       res.status(500).send('Error retrieving participants');
     });
 });
