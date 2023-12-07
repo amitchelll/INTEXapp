@@ -333,7 +333,7 @@ app.post("/storeSurvey", (req, res) => {
             answer: req.body.sleep
         })
 
-        .then(() => {         res.send("Survey data stored successfully!");     
+        .then(() => { res.send("Survey data stored successfully!");     
         })
 
         .catch((error) => {
