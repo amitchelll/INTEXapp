@@ -289,14 +289,15 @@ app.post("/storeSurvey", (req, res) => {
     //     government: '5',
     //     other: '6'
         knex("participants").insert({
+            timestamp: knex.fn.now(),
             age: req.body.age,
             gender: req.body.gender,
             relationship_status: req.body.relationship,
             occupation_status: req.body.occupation,
             organization_id: req.body.orgType,
-            location: 'Provo',
             social_media: req.body.use,
-            avg_time_spent: req.body.avgtime
+            avg_time_spent: req.body.avgtime,
+            location: "Provo",
         })
 
         // do organization table
