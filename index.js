@@ -122,7 +122,6 @@ app.get("/viewData", (req, res) => {
     let query = knex
         .select(
             'participants.participant_id',
-            'participants.timestamp',
             'participants.age',
             'participants.gender',
             'participants.relationship_status',
