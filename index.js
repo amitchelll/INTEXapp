@@ -284,8 +284,6 @@ app.post("/storeSurvey", (req, res) => {
     const participantsData = {
         timestamp: knex.fn.now(),
         location: "Provo",
-        timestamp: knex.fn.now(),
-        location: "Provo",
         age: req.body.age,
         gender : req.body.gender,
         relationship_status : req.body.relationship_status,
