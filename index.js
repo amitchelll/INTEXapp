@@ -310,7 +310,6 @@ app.post("/storeSurvey", (req, res) => {
             res.redirect("/");
         })
        
-        console.log(participantsData);
 
         // this is for socialMedia
         knex("social_media_platforms")
@@ -322,7 +321,7 @@ app.post("/storeSurvey", (req, res) => {
             console.error(error);
             res.status(500).send("Error storing survey data");
         });
-        console.log(participantsData);
+
 
         })
 
