@@ -40,6 +40,7 @@
         <% } %> <% }); %> <% } else { %>
         <option value="" disabled>No locations available</option>
         <% } %>
+
       </select>
 
       <button type="submit">Apply Filter</button>
@@ -52,12 +53,26 @@
             <th>Gender</th>
             <th>Relationship_status</th>
             <th>Occupation_status</th>
-            <th>Organization_ID</th>
             <th>Location</th>
             <th>Social_media</th>
             <th>Avg_time_spent</th>
-            <th>Question_ID</th>
-            <th>Answer</th>
+            <th>location</th>
+            <th>withoutpurpose</th>
+            <th>distractedbusy</th>
+            <th>restless</th>
+            <th>distracted</th>
+            <th>worries</th>
+            <th>organization</th>
+            <th>concentrate</th>
+            <th>oftencompare</th>
+            <th>feelcompare</th>
+            <th>validation</th>
+            <th>depressed</th>
+            <th>dailyactivity</th>
+            <th>sleep</th>
+
+
+
           </tr>
         </thead>
         <tbody style="font-family: Arial; font-size: 9pt">
@@ -68,12 +83,21 @@
             <td><%= myparticipants[iCount].gender %></td>
             <td><%= myparticipants[iCount].relationship_status %></td>
             <td><%= myparticipants[iCount].occupation_status %></td>
-            <td><%= myparticipants[iCount].organization_id %></td>
             <td><%= myparticipants[iCount].location %></td>
             <td><%= myparticipants[iCount].social_media %></td>
             <td><%= myparticipants[iCount].avg_time_spent %></td>
-            <td><%= myparticipants[iCount].question_id %></td>
-            <td><%= myparticipants[iCount].answer %></td>
+            <td><%= myparticipants[iCount].withoutpurpose %></td>
+            <td><%= myparticipants[iCount].distractedbusy %></td>
+            <td><%= myparticipants[iCount].restless %></td>
+            <td><%= myparticipants[iCount].distracted %></td>
+            <td><%= myparticipants[iCount].worries %></td>
+            <td><%= myparticipants[iCount].concentrate %></td>
+            <td><%= myparticipants[iCount].oftencompare %></td>
+            <td><%= myparticipants[iCount].feelcompare %></td>
+            <td><%= myparticipants[iCount].validation %></td>
+            <td><%= myparticipants[iCount].depressed %></td>
+            <td><%= myparticipants[iCount].dailyactivity %></td>
+            <td><%= myparticipants[iCount].sleep %></td>
           </tr>
           <% } %>
         </tbody>
