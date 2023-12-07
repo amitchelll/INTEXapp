@@ -284,15 +284,15 @@ app.post("/storeSurvey", (req, res) => {
     const participantsData = {
         timestamp: knex.fn.now(),
         location: "Provo",
-            timestamp: knex.fn.now(),
-            location: "Provo",
-            age: req.body.age,
-            gender : req.body.gender,
-            relationship_status : req.body.relationship_status,
-            occupation_status : req.body.occupation_status, 
-            organization_id : req.body.organization_id, 
-            social_media : req.body.social_media, 
-            avg_time_spent : req.body.avg_time_spent
+        timestamp: knex.fn.now(),
+        location: "Provo",
+        age: req.body.age,
+        gender : req.body.gender,
+        relationship_status : req.body.relationship_status,
+        occupation_status : req.body.occupation_status, 
+        organization_id : req.body.organization_id, 
+        social_media : req.body.social_media, 
+        avg_time_spent : req.body.avg_time_spent
         }
     const surveyData = {} 
 
