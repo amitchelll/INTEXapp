@@ -307,19 +307,34 @@ app.post("/storeSurvey", (req, res) => {
     };
 
     const surveyData = {
-        answer: req.body.withpurpose,
-        answer: req.body.distractedBusy,
-        answer: req.body.restless,
-        answer: req.body.distracted,
-        answer: req.body.worries,
-        answer: req.body.concentrate,
-        answer: req.body.oftenCompare,
-        answer: req.body.feelCompare,
-        answer: req.body.validation,
-        answer: req.body.depressed,
-        answer: req.body.dailyActivity,
-        answer: req.body.sleep
+            question_id: '1', answer: req.body.withpurpose,
+            question_id: '2', answer: req.body.distractedBusy,
+            question_id: '3', answer: req.body.restless,
+            question_id: '4', answer: req.body.distracted,
+            question_id: '5', answer: req.body.worries,
+            question_id: '6', answer: req.body.concentrate,
+            question_id: '7', answer: req.body.oftenCompare,
+            question_id: '8', answer: req.body.feelCompare,
+            question_id: '9', answer: req.body.validation,
+            question_id: '10', answer: req.body.depressed,
+            question_id: '11', answer: req.body.dailyActivity,
+            question_id: '12', answer: req.body.sleep
+
     };
+        // question_id: req.body.
+        // answer: req.body.withpurpose,
+        // answer: req.body.distractedBusy,
+        // answer: req.body.restless,
+        // answer: req.body.distracted,
+        // answer: req.body.worries,
+        // answer: req.body.concentrate,
+        // answer: req.body.oftenCompare,
+        // answer: req.body.feelCompare,
+        // answer: req.body.validation,
+        // answer: req.body.depressed,
+        // answer: req.body.dailyActivity,
+        // answer: req.body.sleep
+    
 
     // this is for participants
     knex("participants")
@@ -408,7 +423,7 @@ app.post("/storeSurvey", (req, res) => {
 
 
         // return knex("survey_answers").insert(
-        //     {question_id: '1', answer: req.body.withPurpose},
+        //     {question_id: '1', answer: req.body.withpurpose},
         //     {question_id: '2', answer: req.body.distractedBusy},
         //     {question_id: '3', answer: req.body.restless},
         //     {question_id: '4', answer: req.body.distracted},
