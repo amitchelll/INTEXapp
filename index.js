@@ -297,7 +297,7 @@ app.post("/storeSurvey", (req, res) => {
             organization_id: req.body.orgType,
             social_media: req.body.use,
             avg_time_spent: req.body.avgtime,
-            location: "Provo",
+            location: "Provo"
         })
 
         // do organization table
