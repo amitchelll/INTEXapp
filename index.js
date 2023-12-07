@@ -306,6 +306,21 @@ app.post("/storeSurvey", (req, res) => {
         tiktok: req.body.tiktok
     };
 
+    const surveyData = {
+        answer: req.body.withpurpose,
+        answer: req.body.distractedBusy,
+        answer: req.body.restless,
+        answer: req.body.distracted,
+        answer: req.body.worries,
+        answer: req.body.concentrate,
+        answer: req.body.oftenCompare,
+        answer: req.body.feelCompare,
+        answer: req.body.validation,
+        answer: req.body.depressed,
+        answer: req.body.dailyActivity,
+        answer: req.body.sleep
+    };
+
     // this is for participants
     knex("participants")
         .insert(participantsData)
@@ -317,6 +332,16 @@ app.post("/storeSurvey", (req, res) => {
             // this is for socialMedia
             knex("social_media_platforms")
                 .insert(socialMediaData)
+                .then(() => {
+                    console.log("Survey data stored successfully");
+                })
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send("Error storing social media data");
+                });
+        
+                knex("survey_answers")
+                .insert(surveyData)
                 .then(() => {
                     console.log("Survey data stored successfully");
                 })
