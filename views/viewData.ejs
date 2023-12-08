@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/myStyles.css" rel="stylesheet" />
     <title>Participants Table Schema</title>
     <style>
       table {
@@ -24,6 +31,27 @@
       }
     </style>
   </head>
+  <header>
+    <h1 class="site-heading text-center text-faded d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3">City of Provo</span>
+        <span class="site-heading-lower">Mental Health</span>
+    </h1>
+</header>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.ejs">City of Provo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="surveyInput">Survey</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/resources">Resources</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
   <body>
     <form action="/viewData" method="GET">
       <h2>Participants Table Columns</h2>
@@ -41,33 +69,33 @@
             <th>Participant_ID</th>
             <th>Age</th>
             <th>Gender</th>
-            <th>Relationship_status</th>
-            <th>Occupation_status</th>
-            <th>organization</th>
+            <th>Relationship_Status</th>
+            <th>Occupation_Status</th>
+            <th>Organization</th>
             <th>Location</th>
-            <th>Social_media</th>
-            <th>facebook</th>
-            <th>twitter</th>
-            <th>instagram</th>
-            <th>youtube</th>
-            <th>discord</th>
-            <th>reddit</th>
-            <th>pinterest</th>
-            <th>tiktok</th>
-            <th>snapchat</th>
-            <th>Avg_time_spent</th>
-            <th>withoutpurpose</th>
-            <th>distractedbusy</th>
-            <th>restless</th>
-            <th>distracted</th>
-            <th>worries</th>
-            <th>concentrate</th>
-            <th>oftencompare</th>
-            <th>feelcompare</th>
-            <th>validation</th>
-            <th>depressed</th>
-            <th>dailyactivity</th>
-            <th>sleep</th>
+            <th>Social_Media</th>
+            <th>Facebook</th>
+            <th>Twitter</th>
+            <th>Instagram</th>
+            <th>Youtube</th>
+            <th>Discord</th>
+            <th>Reddit</th>
+            <th>Pinterest</th>
+            <th>TikTok</th>
+            <th>Snapchat</th>
+            <th>Avg_Time_Spent</th>
+            <th>Without_Purpose</th>
+            <th>Distracted_Busy</th>
+            <th>Restless</th>
+            <th>Easily_Distracted</th>
+            <th>Worries</th>
+            <th>Concentrate</th>
+            <th>Often_Compare</th>
+            <th>Feel_Compare</th>
+            <th>Validation</th>
+            <th>Depressed</th>
+            <th>Daily_Activity</th>
+            <th>Sleep</th>
           </tr>
         </thead>
         <tbody style="font-family: Arial; font-size: 9pt">
