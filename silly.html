@@ -1,0 +1,22 @@
+<!-- <label for="locationSelect">Filter by Location:</label>
+      <select id="locationSelect" name="location">
+        <option value="">All Locations</option>
+        <% if (locations && locations.length > 0) { %> <%
+        locations.forEach(location => { %> <% if (location === locationFilter) {
+        %>
+        <option value="<%= location %>" selected><%= location %></option>
+        <% } else { %>
+        <option value="<%= location %>"><%= location %></option>
+        <% } %> <% }); %> <% } else { %>
+        <option value="" disabled>No locations available</option>
+        <% } %>
+      </select> -->
+
+// // Extract the location filter value from the request query // const
+locationFilter = req.query.location; // // Apply location filtering if a
+location is selected // if (locationFilter && locationFilter !== '') { // query
+= query.where('location', locationFilter); // } // // Execute the query and
+render the view with filtered or all participants // query.then(participants =>
+{ // res.render("viewData", { myparticipants: participants, locations:
+locationsArray, locationFilter: locationFilter }); // }).catch(error => { // //
+Handle errors // // console.log('Selected Location:', selectedLocation);

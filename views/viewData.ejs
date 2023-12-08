@@ -28,21 +28,6 @@
     <form action="/viewData" method="GET">
       <h2>Participants Table Columns</h2>
 
-      <label for="locationSelect">Filter by Location:</label>
-      <select id="locationSelect" name="location">
-        <option value="">All Locations</option>
-        <% if (locations && locations.length > 0) { %> <%
-        locations.forEach(location => { %> <% if (location === locationFilter) {
-        %>
-        <option value="<%= location %>" selected><%= location %></option>
-        <% } else { %>
-        <option value="<%= location %>"><%= location %></option>
-        <% } %> <% }); %> <% } else { %>
-        <option value="" disabled>No locations available</option>
-        <% } %>
-
-      </select>
-
       <button type="submit">Apply Filter</button>
 
       <table>
@@ -78,8 +63,6 @@
             <th>depressed</th>
             <th>dailyactivity</th>
             <th>sleep</th>
-           
-
           </tr>
         </thead>
         <tbody style="font-family: Arial; font-size: 9pt">
@@ -115,8 +98,6 @@
             <td><%= myparticipants[iCount].depressed %></td>
             <td><%= myparticipants[iCount].dailyactivity %></td>
             <td><%= myparticipants[iCount].sleep %></td>
-
-
           </tr>
           <% } %>
         </tbody>

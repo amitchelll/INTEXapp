@@ -6,15 +6,7 @@ let path = require("path");
 
 const port = process.env.PORT || 3003;
 
-const bcrypt = require('bcrypt')
-
-const session = require('express-session')
-
-const flash = require('express-flash')
-
-const passport = require('passport')
-
-initialize(passport)
+const users = [{ username: 'admin', password: 'adminpassword'}];
 
 //middleware
 app.set("view engine", "ejs")
@@ -32,72 +24,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-app.use(session({
-    secret: 'secret', 
-    resave: false,
-    saveUninitialized: false
-}))
 
-app.use(passport.initialize())
-
-app.use(passport.session())
-
-app.use(flash({
-    
-}))
-
-//passport stuff
-    //const {pool} = require("./dbConfig");
-function initialize(passport) {
-
-    const authenticateUser = (username, password, done) => {
-        knex.raw(
-            `SELECT * FROM login WHERE username = $1`, [username], (err, results)=> {
-                if(err){
-                    throw err;
-                }
-                console.log(results.rows)
-                if (results.rows.length > 0) {
-                    const user = results.rows[0];
-
-                    bcrypt.compare(password, user.password, (err, isMatch)=> {
-                        if (err){
-                            throw err
-                        }
-                        if (isMatch){
-                            return done(null, user)
-                        } else{
-                            return done(null, false, {message: "Password is not correct."})
-                        }
-                    })
-                } else {
-                    return done(null, false, {message: "User is not registered."})
-                }
-            } 
-        )
-    }
-    const LocalStrategy = require("passport-local").Strategy;
-    passport.use(
-        new LocalStrategy(
-            {
-                usernameField: "username",
-                passwordField: "password"
-            }, 
-            authenticateUser
-        )
-    );
-    passport.serializeUser((user, done) => done(null, user.id));
-    passport.deserializeUser((id, done) => {
-        knex.raw(`SELECT * FROM login WHERE id = $1`, [id], (err, results)=> {
-            if (err){
-                throw err
-            }
-            return done(null, results.rows[0]);
-        })
-    })
-}
-
-module.exports = initialize
 
 
 const knex = require("knex")({ // this is the database
@@ -120,109 +47,54 @@ app.get("/", (req, res) => {
 app.get("/resources", (req, res) => {
     res.render(path.join(__dirname + "/views/resources.ejs"));
 });
-
-//dashboard test requests
-app.get("/dashboardtest", checkNotAuthenticated, (req, res) => {
-    res.render("dashboardtest", { user: req.user.first_name });
-  });
-
-  app.get('/logout', (req, res) => {
-    req.logout((err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect('/');
-    });
-  });
-
-  
+ 
 //login page requests
-app.get("/login", checkAuthenticated, (req, res) => {
+app.get("/login", (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
 });
 
 //create account page requests
-app.get("/createAccount", checkAuthenticated, (req, res) => {
+app.get("/createAccount", (req, res) => {
     res.render(path.join(__dirname + "/views/createAccount.ejs"));
 });
-app.post("/createAccount", async (req, res) => {
-    let {first_name, last_name, username, password, password2} = req.body
 
-    console.log({
-        first_name,
-        last_name,
-        username,
-        password,
-        password2
+app.post("/login", (req, res) => {
+    const {username, password } = req.body
+
+const user = users.find(u => u.username === username && u.password === password);
+
+if (user) {
+        knex.select('participant_id', 'timestamp', 'age', 'gender', 'relationship_status', 'occupation_status', 'organization', 'location', 'social_media', 'avg_time_spent', 'withoutpurpose', 'distractedbusy', 'restless', 'distracted', 'worries', 'concentrate', 'oftencompare', 'feelcompare', 'validation', 'depressed', 'dailyactivity', 'sleep')
+        .from('participants')
+        .then(participants => {console.log('Data fetched successfully:', participants)
+
+    res.render('viewData', {mytable: participants})
     })
-
-    let errors =[]
-    
-    if (!first_name || !last_name || !username || !password || !password2) {
-        errors.push({message: "Please enter all fields."})
+    .catch(error => {
+        console.error('error fetching data:', error);
+        res.status(500).send('Internal Server Error')
+    });
+    } else {
+        res.render('login', {error: 'Invalid username or password'});
     }
-    if (password.length < 6) {
-        errors.push({message: "Password should be at least 6 characters."})
-    }
-    if (password != password2) {
-        errors.push({message: "Passwords do not match."})
-    }
-    if (errors.length> 0) {
-        res.render("createAccount", {errors})
-    }else {
-        //form validation has passed
-
-        let hashedPassword = await bcrypt.hash(password, 10)
-        console.log(hashedPassword);
-
-    knex.raw(
-        'SELECT * FROM login WHERE username = $1', [username], (err, results) => {
-            if (err){
-                throw err
-            }
-        
-            console.log(results.rows);
-
-            if (results.rows.length > 0){
-                errors.push({message: "User already registered"});
-                res.render('/createAccount', { errors })
-            }else {
-                knex.raw(`INSERT INTO login (first_name, last_name, username, password)
-                VALUES ($1, $2, $3, $4)
-                RETURNING id, password`, [first_name, last_name, username, hashedPassword], (err, results) => {
-                    if (err){
-                        throw err 
-                    }
-                    console.log(results.rows);
-                    req.flash('success_msg', "You have created an account successfully. Please log in!")
-                    res.redirect('/login')
-                })
-            }
-        }
-    )
-    }
-
 });
+//array stuff
+app.post('/createAccount', (req, res) => {
+    const { username, password} = req.body
+    //check if the username already exists
+    const existingUser = users.find(login => login.username === username)
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/dashboardtest',
-    failureRedirect: '/login', 
-    failureFlash: true
-}));
+    if (existingUser) {
+        res.render('/createAccount', {successMessage : null, error: 'Username already exists. Please choose another username.'});
+    } else {
+        users.push({username, password})
+        setTimeout(() => {
+            res.render('/createAccount', {successMessage: 'Account created successfully!', error:null})
 
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()){
-        return res.redirect('/dashboardtest')
+        }, 1000)
     }
-    next();
-}
-
-function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()){
-        return next()
-    }
-    res.redirect('/login')
-}
+    
+})
 
 //adminaccess.ejs
 app.get("/adminaccess", (req, res) => {
@@ -235,28 +107,19 @@ app.get("/councilaccess", (req, res) => {
 });
 
 //city view data page requests
-const locationsArray = ['Plainsville', 'Provo'];
+// const locationsArray = ['Plainsville', 'Provo'];
 
 app.get("/viewData", (req, res) => {
-    let query = knex
+    knex
         .select()
-        .from("participants")        
-    // Extract the location filter value from the request query
-    const locationFilter = req.query.location;
-  
-    // Apply location filtering if a location is selected
-    if (locationFilter && locationFilter !== '') {
-      query = query.where('location', locationFilter);
-    }
-  
-    // Execute the query and render the view with filtered or all participants
-    query.then(participants => {
-        res.render("viewData", { myparticipants: participants, locations: locationsArray, locationFilter: locationFilter  });
-    }).catch(error => {
-      // Handle errors
-    //   console.log('Selected Location:', selectedLocation);
-      res.status(500).send('Error retrieving participants');
-    });
+        .from("participants")
+        .then(participants => {
+            res.render("viewData", { myparticipants: participants });
+        })
+        .catch(error => {
+            console.error('Error retrieving participants:', error);
+            res.status(500).send('Error retrieving participants');
+        });
 });
 
 // this is for survey
