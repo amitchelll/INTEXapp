@@ -53,9 +53,12 @@ app.get("/login", (req, res) => {
     res.render(path.join(__dirname + "/views/login.ejs"));
 });
 
+// Set the views directory explicitly
+app.set("views", path.join(__dirname, "views"));
+
 //create account page requests
 app.get("/createAccount", (req, res) => {
-    res.render(path.join(__dirname + "/views/createAccount.ejs"));
+    res.render("createAccount");
 });
 
 app.post("/login", (req, res) => {
@@ -63,12 +66,14 @@ app.post("/login", (req, res) => {
 
 const user = users.find(u => u.username === username && u.password === password);
 
+console.log('gah', user);
+
 if (user) {
         knex.select('participant_id', 'timestamp', 'age', 'gender', 'relationship_status', 'occupation_status', 'organization', 'location', 'social_media', 'avg_time_spent', 'withoutpurpose', 'distractedbusy', 'restless', 'distracted', 'worries', 'concentrate', 'oftencompare', 'feelcompare', 'validation', 'depressed', 'dailyactivity', 'sleep')
         .from('participants')
-        .then(participants => {console.log('Data fetched successfully:', participants)
+        .then(participants => {console.log('Data fetched successfully:', participants[0])
 
-    res.render('viewData', {mytable: participants})
+    res.render('viewData', {myparticipants: participants})
     })
     .catch(error => {
         console.error('error fetching data:', error);
@@ -85,11 +90,11 @@ app.post('/createAccount', (req, res) => {
     const existingUser = users.find(login => login.username === username)
 
     if (existingUser) {
-        res.render('/createAccount', {successMessage : null, error: 'Username already exists. Please choose another username.'});
+        res.render('createAccount', {successMessage : null, error: 'Username already exists. Please choose another username.'});
     } else {
         users.push({username, password})
         setTimeout(() => {
-            res.render('/createAccount', {successMessage: 'Account created successfully!', error:null})
+            res.render('createAccount', {successMessage: 'Account created successfully!', error:null})
 
         }, 1000)
     }
@@ -114,12 +119,16 @@ app.get("/viewData", (req, res) => {
         .select()
         .from("participants")
         .then(participants => {
-            res.render("viewData", { myparticipants: participants });
-        })
-        .catch(error => {
-            console.error('Error retrieving participants:', error);
-            res.status(500).send('Error retrieving participants');
-        });
+            res.render("viewData", { myparticipants: participants});
+            })
+         //Execute the query and render the view with filtered or all participants
+        //  query.then(participants =>
+        //     {res.render("viewData", { myparticipants: participants}); 
+        // }).catch(error => {
+  
+        //     res.status(500).send('Error retrieving participants');
+        // });
+        
 });
 
 // this is for survey
