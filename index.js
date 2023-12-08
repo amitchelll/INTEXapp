@@ -1,3 +1,7 @@
+//Allie Mitchell, Autumn Eaton, Cody Nettesheim, Elise Pickett
+//Section 001
+//INTEX Fall 2023
+
 const express = require("express");
 
 let app = express();
@@ -69,7 +73,7 @@ const user = users.find(u => u.username === username && u.password === password)
 console.log('gah', user);
 
 if (user) {
-        knex.select('participant_id', 'timestamp', 'age', 'gender', 'relationship_status', 'occupation_status', 'organization', 'location', 'social_media', 'avg_time_spent', 'withoutpurpose', 'distractedbusy', 'restless', 'distracted', 'worries', 'concentrate', 'oftencompare', 'feelcompare', 'validation', 'depressed', 'dailyactivity', 'sleep')
+        knex.select('participant_id', 'timestamp', 'age', 'gender', 'relationship_status', 'occupation_status', 'organization', 'location', 'social_media', 'facebook', 'twitter', 'instagram', 'youtube', 'discord', 'reddit', 'pinterest', 'tiktok', 'snapchat', 'avg_time_spent', 'withoutpurpose', 'distractedbusy', 'restless', 'distracted', 'worries', 'concentrate', 'oftencompare', 'feelcompare', 'validation', 'depressed', 'dailyactivity', 'sleep')
         .from('participants')
         .then(participants => {console.log('Data fetched successfully:', participants[0])
 
