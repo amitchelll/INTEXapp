@@ -4,7 +4,7 @@ let app = express();
 
 let path = require("path");
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3000;
 
 const users = [{ username: 'admin', password: 'adminpassword'}];
 
@@ -35,7 +35,7 @@ const knex = require("knex")({ // this is the database
             password: process.env.RDS_PASSWORD || "password",
             database: process.env.RDS_DB_NAME || "postgres",
             port: process.env.RDS_PORT || 5432,
-            ssl: {rejectUnauthorized: false},
+            ssl: process.env.DB_SSL ? {rejectUnauthorized: false} : false
         }
     })
 
