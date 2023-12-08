@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Participants Table Schema</title>
+    <label for="searchInput">Search:</label>
+    <input type="text" id="searchInput" name="search" placeholder="Enter search term">
+    <input type="submit" value="Search">
     <style>
       table {
         border-collapse: collapse;
@@ -101,20 +104,21 @@
         </tbody>
       </table>
     </form>
-
-    <!-- Include jQuery
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
-        $("#applyFilter").on("click", function () {
-          const selectedLocation = $("#locationSelect").val();
-
-          // Make an AJAX request to the server
-          $.get(`/viewData?location=${selectedLocation}`, function (data) {
-            $("#filteredContent").html(data);
+        $("form").submit(function (event) {
+          event.preventDefault(); // Prevent the form from submitting the traditional way
+  
+          const searchTerm = $("#searchInput").val();
+  
+          // Make an AJAX request to the server with the search term
+          $.get(`/viewData?search=${searchTerm}`, function (data) {
+            $("tbody").html(data);
           });
         });
-      }); -->
+      });
+    </script>
     </script>
   </body>
 </html>
